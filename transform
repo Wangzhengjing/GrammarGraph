@@ -1,0 +1,105 @@
+#!/bin/bash
+
+if [ $# = 0 ];then
+	echo "请指定解析目标文件."
+	exit 1
+fi
+
+
+START=1
+END=0
+NORMAL=2
+endflag=$NORMAL
+keyword=
+dstfile=dig.dot
+str_child=
+str_parent=
+rst=`rm -rf ./$dstfile`
+
+echo "graph dig {" >> ./$dstfile
+
+exclud1="\=> \.\."
+exclud2="= ."
+exclud="^ ! $ & % @ ' + - \* / , ; ( ) :"
+
+generate_child()
+{
+	echo str_child $str_child
+	for i in $str_child
+	do
+		rst=`expr index "$i" '>' 2>&1`
+		if [ $? = 0 ];then
+			if ! [ $rst = 0 ];then
+				endflag=$END
+			fi
+		fi
+		rst=`expr index "$i" '<' 2>&1`
+		if [ $? = 0 ];then
+			if ! [ $rst  = 0 ];then
+				endflag=$START
+			fi
+			rst=`expr index "$i" '>' 2>&1`
+			if ! [ $rst  = 0 ];then
+				endflag=$NORMAL
+			fi
+		fi
+		if [ $endflag = $START ];then
+			keyword=$keyword" "$i
+			continue
+		fi
+		if [ $endflag = $END ];then
+			keyword=$keyword" "$i
+			i=$keyword
+			keyword=
+			endflag=$NORMAL
+		fi
+
+		echo "$str_parent -- $i;" >> ./$dstfile 2>&1
+	done
+}
+
+while read line
+do
+	#line="<equiv var> ::= <equiv var> . <ident>"
+	str_child=${line#*::=}
+	str_parent=${line%::=*}
+
+	excludFlag=0
+
+	for j in $exclud1
+	do
+		rst=`echo $str_child | grep $j 2>&1`
+		if [ $? = 0 ];then
+			str_child=`echo ${str_child//$j/\"$j\"}`
+			excludFlag=1
+		fi
+	done
+	if [ $excludFlag = 0 ];then
+		for j in $exclud2
+		do
+			rst=`expr index "$str_child" $j 2>&1`
+			if [ $? = 0 ];then
+				if ! [ $rst  = 0 ];then
+					str_child=`echo ${str_child//$j/\"$j\"}`
+				fi
+			fi
+		done
+	fi
+
+	for j in $exclud
+	do
+		rst=`expr index "$str_child" '\'$j 2>&1`
+		if [ $? = 0 ];then
+			if ! [ $rst  = 0 ];then
+				str_child=`echo ${str_child//$j/\"$j\"}`
+			fi
+		fi
+	done
+
+	generate_child $str_child
+
+	excludFlag=0
+	#break
+done < $1
+
+echo "}" >> ./$dstfile

@@ -1,0 +1,1737 @@
+   	<SYSTEM GOAL SYMBOL>
+   	<stmt> ::= <stbeg> <statement> <stend>
+   	<stbeg>
+   	<stend>
+   	<statement> ::= <prog title>   
+   	<statement> ::= <nii> <nim> <entry statement>  
+   	<statement> ::= <declaration>  
+   	<statement> ::= <nii> <nim> <simple stmt>  
+   	<statement> ::= <nii> <nim> <GOTO stmt>    
+   	<statement> ::= <nii> <nim> <control stmt>  
+   	<statement> ::= <nii> <nim> <block stmt>  
+   	<statement> ::= <nii> <nim> <format stmt>   
+   	<statement> ::= <null stmt>  
+   	<statement> ::= <end> <end stmt>      
+   	<statement> ::= <empty file>    
+   	<statement> ::= INCLUDE <quoted string>  
+   	<statement> ::= <nii> <nim> OPTIONS  
+   	<statement> ::= <nis> <nii> CONTAINS  
+   	<statement> ::= <directive>
+   	<iii>
+   	<nii>
+   	<nim> 
+   	<pgm> 
+   	<end> 
+   	<prog title> ::= <routine id>  
+   	<prog title> ::= <routine id> ( ) <func suffix>  
+   	<prog title> ::= <routine id> ( <formal list> ) <func suffix>  
+   	<prog title> ::= BLOCKDATA  
+   	<prog title> ::= BLOCKDATA <id>  
+   	<prog title> ::= MODULE <id>  
+   	<prog title> ::= SUBMODULE ( <id> ) <id>  
+   	<prog title> ::= SUBMODULE ( <id> : <id> ) <id>  
+   	<prog title> ::= <module procedure stmt>
+   	<ident> ::= <id>
+   	<id> ::= <id name>
+   	<func suffix>  
+   	<func suffix> ::= BIND  <bind attr> <id name> ( <id name> )  
+   	<func suffix> ::= BIND  <bind attr>  
+   	<func suffix> ::= <id name> ( <id name> )   BIND  <bind attr>  
+   	<func suffix> ::= <id name> ( <id name> )
+   	<entry statement> ::= <entry id>  
+   	<entry statement> ::= <entry id> ( ) <func suffix>  
+   	<entry statement> ::= <entry id> ( <formal list> ) <func suffix>
+   	<routine id> ::= <subr prefix> SUBROUTINE <id>    
+   	<routine id> ::= <subr prefix> FUNCTION <id>   
+   	<routine id> ::= <func prefix> FUNCTION <fcn name>  
+   	<routine id> ::= PROGRAM <id>
+   	<subr prefix>  
+   	<subr prefix> ::= <prefix spec>
+   	<prefix spec> ::= <prefix spec> <prefix>  
+   	<prefix spec> ::= <prefix>
+   	<prefix> ::= RECURSIVE  
+   	<prefix> ::= PURE  
+   	<prefix> ::= ELEMENTAL  
+   	<prefix> ::= ATTRIBUTES ( <id name list> )  
+   	<prefix> ::= IMPURE  
+   	<prefix> ::= MODULE  
+   	<prefix> ::= LAUNCHBOUNDS ( <launchbound> )  
+   	<prefix> ::= LAUNCHBOUNDS ( <launchbound> , <launchbound> )
+   	<launchbound> ::= <integer>
+   	<id name list> ::= <id name list> , <id name>  
+   	<id name list> ::= <id name>
+   	<func prefix> ::= <data type>  
+   	<func prefix> ::= <data type> <prefix spec>  
+   	<func prefix> ::= <prefix spec> <data type>  
+   	<func prefix> ::= <prefix spec> <data type> <prefix spec>
+   	<entry id> ::=   ENTRY <id>
+   	<fcn name> ::= <id> <opt len spec>
+   	<formal list> ::= <formal list> , <formal>  
+   	<formal list> ::= <formal>
+   	<formal> ::= <id>  
+   	<formal> ::= @
+   	<ident list> ::= <ident list> , <ident>  
+   	<ident list> ::= <ident>
+   	<end stmt> ::= <END stmt>     
+   	<end stmt> ::= ENDBLOCKDATA  <opt ident>  
+   	<end stmt> ::= ENDFUNCTION   <opt ident>  
+   	<end stmt> ::= ENDMODULE     <opt ident>  
+   	<end stmt> ::= ENDPROGRAM    <opt ident>  
+   	<end stmt> ::= ENDSUBROUTINE <opt ident>  
+   	<end stmt> ::= ENDSUBMODULE  <opt ident>  
+   	<end stmt> ::= ENDPROCEDURE  <opt ident>
+   	<opt ident>  
+   	<opt ident> ::= <ident>
+   	<block stmt> ::= BLOCK  
+   	<block stmt> ::= <check construct> : BLOCK  
+   	<block stmt> ::= ENDBLOCK <construct name>
+   	<declaration> ::= <data type> <optional comma> <pgm> <typdcl list>  
+   	<declaration> ::= <dimkeyword> <opt attr> <pgm> <dcl id list>     
+   	<declaration> ::= <nis> IMPLICIT <pgm> <implicit type>    
+   	<declaration> ::= <nis> COMMON <pgm> <common list>    
+   	<declaration> ::= <nis> EXTERNAL <opt attr> <pgm> <ident list>       
+   	<declaration> ::= <nis> INTRINSIC <opt attr> <pgm> <ident list>      
+   	<declaration> ::= <iii> <nis> SAVE <opt attr> <save list>   
+   	<declaration> ::= <iii> <nis> SAVE                        
+   	<declaration> ::= PARAMETER <pgm> ( <ideqc list> )        
+   	<declaration> ::= <nis> EQUIVALENCE <pgm> <equiv groups>  
+   	<declaration> ::= <iii> <nis> DATA <dinit list>           
+   	<declaration> ::= PARAMETER  <pgm> <vxeqc list>     
+   	<declaration> ::= <iii> <nis> NAMELIST <namelist groups>  
+   	<declaration> ::= STRUCTURE <pgm> <struct begin1> <struct begin2>  
+   	<declaration> ::= ENDSTRUCTURE                
+   	<declaration> ::= RECORD <pgm> <record list>   
+   	<declaration> ::= UNION   
+   	<declaration> ::= ENDUNION  
+   	<declaration> ::= MAP   
+   	<declaration> ::= ENDMAP  
+   	<declaration> ::= TYPE <opt type spec> <opt attr> <pgm> <id> <opt tpsl>  
+   	<declaration> ::= ENDTYPE <opt ident>  
+   	<declaration> ::= VOLATILE <opt attr> <pgm> <vol list>  
+   	<declaration> ::= <nis> POINTER <opt attr> <pgm> <ptr list>  
+   	<declaration> ::= <nis> ALLOCATABLE <opt attr> <pgm> <alloc id list>  
+   	<declaration> ::= <data type> <opt attr list> :: <pgm> <entity decl list>  
+   	<declaration> ::= <intent> <opt attr> <pgm> <ident list>  
+   	<declaration> ::= <access spec> <opt attr> <pgm> <access list>  
+   	<declaration> ::= OPTIONAL <opt attr> <pgm> <ident list>  
+   	<declaration> ::= TARGET <opt attr> <pgm> <target list>  
+   	<declaration> ::= <nis> <interface>  
+   	<declaration> ::= <nis> <end interface>  
+   	<declaration> ::= <nis> <pgm> USE <use>  
+   	<declaration> ::= <access spec>  
+   	<declaration> ::= <procedure stmt>  
+   	<declaration> ::= <mp threadprivate> ( <tp list> )  
+   	<declaration> ::= <dec declaration>  
+   	<declaration> ::= <pragma declaration>  
+   	<declaration> ::= <nis> AUTOMATIC <opt attr> <pgm> <ident list>      
+   	<declaration> ::= <nis> STATIC <opt attr> <pgm> <ident list>  
+   	<declaration> ::= BIND <bind attr> <opt attr>  <bind list>  
+   	<declaration> ::= <nis> <pgm> <import> <opt import>  
+   	<declaration> ::= <nis> <pgm> ENUM , BIND ( <id name> )  
+   	<declaration> ::= <nis> ENUMERATOR <opt attr> <enums>  
+   	<declaration> ::= <nis> ENDENUM  
+   	<declaration> ::= <procedure declaration>  
+   	<declaration> ::= <type bound procedure>  
+   	<declaration> ::= ATTRIBUTES ( <id name list> ) <opt attr> <pgm> <ident list>  
+   	<declaration> ::= TCONTAINS  
+   	<declaration> ::= <nis> PROTECTED <opt attr> <pgm> <ident list>  
+   	<declaration> ::= <nis> ASYNCHRONOUS <opt attr> <pgm> <ident list>  
+   	<declaration> ::= <nis> <accel decl begin> ACCDECL <accel decl list>  
+   	<declaration> ::= <nis> <accel decl begin> DECLARE <accel decl list>  
+   	<declaration> ::= <generic type procedure>  
+   	<declaration> ::= <final subroutines>   
+   	<declaration> ::= <nis> CONTIGUOUS <opt attr> <pgm> <ident list>  
+   	<declaration> ::= <nis> <accel decl begin> ROUTINE <accel routine list>  
+   	<declaration> ::= <nis> <accel decl begin> ROUTINE ( <routine id list> ) <accel routine list>  
+   	<declaration> ::= <seq> <pgm>  
+   	<declaration> ::= <nis> <mp decl begin> <mp decl>  
+   	<declaration> ::= <nis> VALUE <opt attr> <pgm> <ident list>  
+   	<declaration> ::= <accel begin> <accel dp stmts>
+   	<accel dp stmts> ::= <accel shape declstmt>  
+   	<accel dp stmts> ::= <accel policy declstmt>
+   	<accel shape declstmt> ::= ACCSHAPE <accel shape dir>
+   	<accel shape dir> ::= ( <accel dpvarlist> )  
+   	<accel shape dir> ::= ( <accel dpvarlist> ) <accel shape attrs>  
+   	<accel shape dir> ::= '<' <ident> '>' ( <accel dpvarlist> )  
+   	<accel shape dir> ::= '<' <ident> '>' ( <accel dpvarlist> ) <accel shape attrs>
+   	<accel shape attrs> ::= <accel shape attrs> <accel shape attr>  
+   	<accel shape attrs> ::= <accel shape attr>
+   	<accel shape attr> ::= <accel dpdefault attr>  
+   	<accel shape attr> ::= <accel dpinit_needed attr>  
+   	<accel shape attr> ::= <accel dptype attr>
+   	<accel dpdefault attr> ::= DEFAULT ( <ident> ) 
+   	<accel dpinit_needed attr> ::= INIT_NEEDED ( <accel dpinitvar list> )
+   	<accel dpinitvar list> ::= <accel dpinitvar list> , <ident>  
+   	<accel dpinitvar list> ::= <ident>
+   	<accel dptype attr> ::= TYPE ( <ident> )
+   	<accel policy declstmt> ::= ACCPOLICY <accel policy name> <accel policy dir>
+   	<accel policy name> ::= '<' <ident> '>'  
+   	<accel policy name> ::= '<' <ident> : <ident> '>'
+   	<accel policy dir> ::= <accel policy attr list>
+   	<accel policy attr list> ::= <accel policy attr list> <accel policy attr>  
+   	<accel policy attr list> ::= <accel policy attr>
+   	<accel policy attr> ::= CREATE ( <accel dpvarlist> )  
+   	<accel policy attr> ::= NO_CREATE ( <accel dpvarlist> )  
+   	<accel policy attr> ::= COPYIN ( <accel dpvarlist> )  
+   	<accel policy attr> ::= COPYOUT ( <accel dpvarlist> )  
+   	<accel policy attr> ::= COPY ( <accel dpvarlist> )  
+   	<accel policy attr> ::= UPDATE ( <accel dpvarlist> )  
+   	<accel policy attr> ::= DEVICEPTR ( <accel dpvarlist> )  
+   	<accel policy attr> ::= <accel dpdefault attr>  
+   	<accel policy attr> ::= <accel dptype attr>
+   	<accel dpvarlist> ::= <accel dpvarlist> , <accel dpvar>  
+   	<accel dpvarlist> ::= <accel dpvar>
+   	<accel dpvar> ::= <ident>  
+   	<accel dpvar> ::= <ident> '<' <ident> '>'  
+   	<accel dpvar> ::= <ident> ( <accel dpvar bnds> )  
+   	<accel dpvar> ::= <ident> '<' <ident> '>' ( <accel dpvar bnds> )
+   	<accel dpvar bnds> ::= <accel dpvar bnds> , <accel dpvar bnd>  
+   	<accel dpvar bnds> ::= <accel dpvar bnd>
+   	<accel dpvar bnd> ::= <accel dp bnd> : <accel dp bnd>  
+   	<accel dpvar bnd> ::= <accel dp bnd>
+   	<accel dp bnd> ::= <accel dp sbnd>  
+   	<accel dp bnd> ::= <accel dp bndexp>  
+   	<accel dp bnd> ::= <accel dp bndexp1>
+   	<accel dp bndexp> ::= <accel dp addexp>  
+   	<accel dp bndexp> ::= <accel dp mulexp>
+   	<accel dp addexp> ::= <accel dp sbnd> <accel add opr> <accel dp sbnd>
+   	<accel dp mulexp> ::= <accel dp sbnd> <accel mul opr> <accel dp sbnd>
+   	<accel add opr> ::= +  
+   	<accel add opr> ::= -
+   	<accel mul opr> ::= @  
+   	<accel mul opr> ::= /
+   	<accel dp bndexp1> ::= <accel dp mulexp> <accel add opr> <accel dp sbnd>
+   	<accel dp sbnd> ::= <constant>  
+   	<accel dp sbnd> ::= <ident> 
+   	<routine id list> ::= <ident>  
+   	<routine id list> ::= <routine id list> , <ident>
+   	<dimkeyword> ::= DIMENSION  
+   	<dimkeyword> ::= <dimattr>
+   	<nis> 
+   	<data type> ::=  <base type> <opt len spec>  
+   	<data type> ::= <base type> ( <len kind> )  
+   	<data type> ::= TYPE ( <intrinsic type> )  
+   	<data type> ::= TYPE ( <id> <opt derived type spec> )  
+   	<data type> ::= CLASS <pgm> ( <id> <opt derived type spec> )  
+   	<data type> ::= CLASS <pgm> ( @ )
+   	<type spec> ::=  <intrinsic type>  
+   	<type spec> ::= <ident>
+   	<intrinsic type> ::= <base type> <opt len spec>  
+   	<intrinsic type> ::= <base type> ( <len kind> )
+   	<base type> ::= INTEGER  
+   	<base type> ::= REAL      
+   	<base type> ::= DOUBLEPRECISION  
+   	<base type> ::= COMPLEX  
+   	<base type> ::= DOUBLECOMPLEX    
+   	<base type> ::= LOGICAL   
+   	<base type> ::= CHARACTER  
+   	<base type> ::= NCHARACTER  
+   	<base type> ::= BYTE
+   	<opt len spec>  
+   	<opt len spec> ::= @ <len spec>  
+   	<opt len spec> ::= : <len spec>
+   	<len spec> ::= <integer>   
+   	<len spec> ::= ( <tpv> )
+   	<tpv> ::= <expression>  
+   	<tpv> ::= @  
+   	<tpv> ::= :
+   	<len kind> ::= <tpv>  
+   	<len kind> ::= <len kind spec>  
+   	<len kind> ::= <tpv> , <len kind spec> 
+   	<len kind> ::= <tpv> , <tpv>  
+   	<len kind> ::= <len kind spec> , <len kind spec>
+   	<len kind spec> ::= <id name> = <tpv>
+   	<optional comma>  
+   	<optional comma> ::= ,
+   	<opt attr>  
+   	<opt attr> ::= ::
+   	<typdcl list> ::= <typdcl list> , <typdcl item>  
+   	<typdcl list> ::= <typdcl item>
+   	<typdcl item> ::= <dcl id> / <dinit const list> /  
+   	<typdcl item> ::= <dcl id>  
+   	<typdcl item> ::= %FILL
+   	<dcl id list> ::= <dcl id list> , <dcl id>  
+   	<dcl id list> ::= <dcl id>
+   	<dcl id> ::= <ident> <opt len spec>   
+   	<dcl id> ::= <ident> <opt len spec> <dim beg> <dimension list> ) <opt len spec>
+   	<dim beg> ::= (
+   	<dimension list> ::= <dim list>
+   	<dim list> ::= <dim list> , <dim spec>  
+   	<dim list> ::= <dim spec>
+   	<dim spec> ::= <explicit shape>  
+   	<dim spec> ::= <expression> : @   
+   	<dim spec> ::= @  
+   	<dim spec> ::= :  
+   	<dim spec> ::= <expression> :  
+   	<dim spec> ::= ..
+   	<explicit shape> ::= <expression> : <expression>  
+   	<explicit shape> ::= <expression>
+   	<implicit type> ::= <implicit list>  
+   	<implicit type> ::= NONE
+   	<implicit list> ::= <implicit list> , <data type> <implp> <range list> )  
+   	<implicit list> ::= <data type> <implp> <range list> )
+   	<range list> ::= <range list> , <range>  
+   	<range list> ::= <range>
+   	<range> ::= <letter> - <letter>  
+   	<range> ::= <letter>
+   	<common list> ::= <common list> <com dcl>  
+   	<common list> ::= <init com dcl>
+   	<init com dcl> ::= <dcl id list>  
+   	<init com dcl> ::= <dcl id list> ,  
+   	<init com dcl> ::= <com dcl>
+   	<com dcl> ::= '//' <dcl id list> <optional comma>    
+   	<com dcl> ::= / / <dcl id list> <optional comma>    
+   	<com dcl> ::= <common> <dcl id list> <optional comma>
+   	<common> ::= / <ident> /
+   	<save list> ::= <save list> , <save id>  
+   	<save list> ::= <save id>
+   	<save id> ::= <common>  
+   	<save id> ::= <ident>
+   	<ideqc list> ::= <ideqc list> , <ident> <init beg> <expression>  
+   	<ideqc list> ::= <ident> <init beg> <expression>
+   	<init beg> ::= =  
+   	<init beg> ::= '=>'
+   	<vxeqc list> ::= <vxeqc list> , <ident> = <expression>  
+   	<vxeqc list> ::= <ident> = <expression>
+   	<enums> ::= <enums> , <enum>  
+   	<enums> ::= <enum>
+   	<enum> ::= <ident> = <expression>  
+   	<enum> ::= <ident>
+   	<equiv groups> ::= <equiv groups> , <equiv group>  
+   	<equiv groups> ::= <equiv group>
+   	<equiv group> ::= ( <equiv list> )
+   	<equiv list> ::= <equiv list> , <equiv var>  
+   	<equiv list> ::= <equiv var>
+   	<equiv var> ::= <ident>  
+   	<equiv var> ::= <equiv var> ( <ssa list> )  
+   	<equiv var> ::= <equiv var> . <ident>
+   	<namelist groups> ::= <namelist groups> <namelist group>  
+   	<namelist groups> ::= <namelist group>
+   	<namelist group> ::= / <ident> / <namelist list>
+   	<namelist list> ::= <namelist list> <namelist var>  
+   	<namelist list> ::= <namelist var>
+   	<namelist var> ::= <ident> <optional comma>
+   	<struct begin1>  
+   	<struct begin1> ::= / <ident> /
+   	<struct begin2>  
+   	<struct begin2> ::= <field namelist>
+   	<field namelist> ::= <field namelist> , <field name>  
+   	<field namelist> ::= <field name>
+   	<field name> ::= <ident>  
+   	<field name> ::= <ident> <dim beg> <dimension list> )
+   	<record list> ::= <record list> <record>  
+   	<record list> ::= <record>
+   	<record> ::= / <struct name> / <record namelist>
+   	<struct name> ::= <ident>
+   	<record namelist> ::= <record namelist> <record dcl>  
+   	<record namelist> ::= <record dcl>
+   	<record dcl> ::= <ident> <optional comma>  
+   	<record dcl> ::= <ident> <dim beg> <dimension list> ) <optional comma>
+   	<vol list> ::= <vol list> , <vol id>  
+   	<vol list> ::= <vol id>
+   	<vol id> ::= <common>  
+   	<vol id> ::= <ident>
+   	<dinit list> ::= <dinit list> <optional comma> <dinit>  
+   	<dinit list> ::= <dinit>
+   	<dinit> ::= <dinit var list> / <dinit const list> /
+   	<dinit var list> ::= <dinit var list> , <dinit var>  
+   	<dinit var list> ::= <dinit var>
+   	<dinit var> ::= <dvar ref>  
+   	<dinit var> ::= ( <dinit var list> , <ident> = <expression> , <expression> <e3> )
+   	<e3>  
+   	<e3> ::= , <expression>
+   	<dinit const list>  ::= <dinit const list> , <data item>  
+   	<dinit const list> ::= <data item>
+   	<data item>  ::= <data constant>  
+   	<data item> ::= <data rpt> @ <data constant>
+   	<data rpt> ::= <integer>  
+   	<data rpt> ::= <int kind const>  
+   	<data rpt> ::= <ident constant>
+   	<data constant> ::= <constant>  
+   	<data constant> ::= <addop> <constant>   
+   	<data constant> ::= <ident constant>  
+   	<data constant> ::= <addop> <ident constant>  
+   	<data constant> ::= <ident ssa> ( <ssa list> )  
+   	<data constant> ::= <ident ssa> ( )  
+   	<data constant> ::= <substring>
+   	<ident ssa> ::= <ident>
+   	<ident constant> ::= <ident>
+   	<ptr list> ::= <ptr list> , <ptr assoc>  
+   	<ptr list> ::= <ptr assoc>
+   	<ptr assoc> ::= ( <ident> , <dcl id> )  
+   	<ptr assoc> ::= <alloc id>
+   	<alloc id list> ::= <alloc id list> , <alloc id>  
+   	<alloc id list> ::= <alloc id>
+   	<alloc id> ::= <ident>  
+   	<alloc id> ::= <ident> <dim beg> <dimension list> )
+   	<opt attr list>  
+   	<opt attr list> ::= , <attr list>
+   	<attr list> ::= <attr list> , <attr>  
+   	<attr list> ::= <attr>
+   	<attr> ::= PARAMETER      
+   	<attr> ::= <access spec>  
+   	<attr> ::= ALLOCATABLE    
+   	<attr> ::= <dimattr> <dim beg> <dimension list> )  
+   	<attr> ::= EXTERNAL       
+   	<attr> ::= <intent>  
+   	<attr> ::= INTRINSIC      
+   	<attr> ::= OPTIONAL       
+   	<attr> ::= POINTER        
+   	<attr> ::= SAVE           
+   	<attr> ::= TARGET         
+   	<attr> ::= AUTOMATIC      
+   	<attr> ::= STATIC         
+   	<attr> ::= BIND <bind attr>  
+   	<attr> ::= VALUE          
+   	<attr> ::= VOLATILE       
+   	<attr> ::= DEVICE         
+   	<attr> ::= PINNED         
+   	<attr> ::= SHARED         
+   	<attr> ::= CONSTANT	  
+   	<attr> ::= PROTECTED      
+   	<attr> ::= ASYNCHRONOUS   
+   	<attr> ::= ABSTRACT  
+   	<attr> ::= TEXTURE   
+   	<attr> ::= KIND  
+   	<attr> ::= LEN   
+   	<attr> ::= CONTIGUOUS  
+   	<attr> ::= MANAGED
+   	<bind attr> ::= ( <id name> )  
+   	<bind attr> ::= ( <id name> , <id name> = <quoted string> )
+   	<bind list> ::=  <bind list> , <bind entry>  
+   	<bind list> ::= <bind entry>
+   	<bind entry> ::= <common>  
+   	<bind entry> ::= <id>
+   	<opt type spec>  
+   	<opt type spec> ::= , <type attr list>
+   	<type attr list> ::= <type attr list> , <type attr>  
+   	<type attr list> ::= <type attr>
+   	<type attr> ::= BIND <bind attr>  
+   	<type attr> ::= <access spec>  
+   	<type attr> ::= EXTENDS ( <id> )  
+   	<type attr> ::= ABSTRACT
+   	<access spec> ::= PUBLIC   
+   	<access spec> ::= PRIVATE
+   	<access list> ::= <access list>, <access>  
+   	<access list> ::= <access>
+   	<access> ::= <ident>  
+   	<access> ::= <id name> ( <operator> )  
+   	<access> ::= <id name> ( = )
+   	<seq> ::= SEQUENCE  
+   	<seq> ::= NOSEQUENCE
+   	<intent> ::= INTENT ( <id name> )  
+   	<intent> ::= INTENT ( <id name> <id name> )
+   	<entity decl list> ::= <entity decl list> , <entity decl>  
+   	<entity decl list> ::= <entity decl>
+   	<entity decl> ::= <entity id>  
+   	<entity decl> ::= <entity id> <init beg> <expression>  
+   	<entity decl> ::= <entity id> '=>' <id> ( )
+   	<entity id> ::= <ident> <opt len spec>   
+   	<entity id> ::= <ident> <opt len spec> <dim beg> <dimension list> ) <opt len spec>
+   	<target list> ::= <target list> , <target>  
+   	<target list> ::= <target>
+   	<target> ::= <dcl id>
+   	<interface> ::= <begininterface>  
+   	<interface> ::= <begininterface> <generic spec>
+   	<begininterface> ::= <pgm> INTERFACE  
+   	<begininterface> ::= <pgm> ABSTRACT INTERFACE
+   	<generic spec> ::= <generic name>  
+   	<generic spec> ::= OPERATOR ( <operator> )  
+   	<generic spec> ::= ASSIGNMENT ( = )
+   	<generic name> ::= <ident>  
+   	<generic name> ::= OPERATOR  
+   	<generic name> ::= ASSIGNMENT  
+   	<generic name> ::= <ident> ( <ident> )
+   	<operator> ::= <intrinsic op>  
+   	<operator> ::= . <ident> .    
+   	<operator> ::= <defined op>
+   	<intrinsic op> ::= <addop>    
+   	<intrinsic op> ::= <mult op>  
+   	<intrinsic op> ::= @@         
+   	<intrinsic op> ::= <n eqv op>  
+   	<intrinsic op> ::= .OR.       
+   	<intrinsic op> ::= .O.        
+   	<intrinsic op> ::= .AND.      
+   	<intrinsic op> ::= .NOT.      
+   	<intrinsic op> ::= .N.        
+   	<intrinsic op> ::= <relop>    
+   	<intrinsic op> ::= '//'
+   	<n eqv op> ::= .EQV.  
+   	<n eqv op> ::= .NEQV.  
+   	<n eqv op> ::= .X.  
+   	<n eqv op> ::= .XOR.
+   	<end interface> ::= ENDINTERFACE  
+   	<end interface> ::= ENDINTERFACE <generic spec>
+   	<module procedure stmt> ::= MODULE PROCEDURE <ident list>  
+   	<module procedure stmt> ::= MODULE PROCEDURE :: <ident list>
+   	<procedure stmt> ::= PROCEDURE <ident list>  
+   	<procedure stmt> ::= PROCEDURE :: <ident list>
+   	<use> ::= <get module>  
+   	<use> ::= <get module> , <rename list>  
+   	<use> ::= <get module> , <id name> : <only list>  
+   	<use> ::= <get module> , <id name> :
+   	<get module> ::= <id>  
+   	<get module> ::= , <module nature> :: <id>  
+   	<get module> ::= :: <id>
+   	<module nature> ::= INTRINSIC  
+   	<module nature> ::= NON_INTRINSIC
+   	<rename list> ::= <rename list> , <rename>  
+   	<rename list> ::= <rename>
+   	<rename> ::= <ident> '=>' <ident>  
+   	<rename> ::= <id name> ( <rename operator> ) '=>' <id name> ( <rename operator> )
+   	<rename operator> ::= . <ident> .     
+   	<rename operator> ::= <defined op>
+   	<only list> ::= <only list> , <only>  
+   	<only list> ::= <only>
+   	<only> ::= <ident>  
+   	<only> ::= <ident> '=>' <ident>  
+   	<only> ::= <id name> ( <only operator> )  
+   	<only> ::= <id name> ( = )
+   	<only operator> ::= <intrinsic op>  
+   	<only operator> ::= . <ident> .     
+   	<only operator> ::= <defined op>
+   	<tp list> ::= <tp list> , <tp item>  
+   	<tp list> ::= <tp item>
+   	<tp item> ::= <common>  
+   	<tp item> ::= <ident>
+   	<dec declaration> ::= ATTRIBUTES <msattr list> :: <cmn ident list>  
+   	<dec declaration> ::= ALIAS <ident> , <alt name>  
+   	<dec declaration> ::= ALIAS <ident> : <alt name>
+   	<msattr list> ::= <msattr list> , <msattr>  
+   	<msattr list> ::= <msattr>
+   	<msattr> ::= <id name>  
+   	<msattr> ::= <id name> : <alt name>
+   	<alt name> ::= <quoted string>  
+   	<alt name> ::= <id name>
+   	<cmn ident list> ::= <cmn ident list> , <cmn ident>  
+   	<cmn ident list> ::= <cmn ident>
+   	<cmn ident> ::= <common>  
+   	<cmn ident> ::= <ident>
+   	<pragma declaration> ::= <nis> LOCAL ( <ident list> )  
+   	<pragma declaration> ::= <nis> <ignore tkr>  
+   	<pragma declaration> ::= <nis> DEFAULTKIND <dflt>  
+   	<pragma declaration> ::= <nis> MOVEDESC <id name>
+   	<ignore tkr> ::= IGNORE_TKR  
+   	<ignore tkr> ::= IGNORE_TKR <tkr id list>
+   	<tkr id list> ::= <tkr id list> , <tkr id>  
+   	<tkr id list> ::= <tkr id>
+   	<tkr id> ::= <tkr spec> <ident>
+   	<tkr spec>  
+   	<tkr spec> ::= ( <id name> )
+   	<dflt>  
+   	<dflt> ::= ( <ident list> )
+   	<import> ::= IMPORT
+   	<opt import>  
+   	<opt import> ::= <opt attr> <import name list>
+   	<import name list> ::= <import name list> , <import name>  
+   	<import name list> ::= <import name>
+   	<import name> ::= <ident>
+   	<procedure declaration> ::= <procedure> <opt attr> <proc dcl list>
+   	<procedure> ::= PROCEDURE ( <proc interf> ) <opt proc attr>
+   	<proc interf>  
+   	<proc interf> ::= <id>  
+   	<proc interf> ::= <data type>
+   	<opt proc attr>  
+   	<opt proc attr> ::= , <proc attr list>
+   	<proc attr list> ::= <proc attr list> , <proc attr>  
+   	<proc attr list> ::= <proc attr>
+   	<proc attr> ::= <access spec>  
+   	<proc attr> ::= BIND <bind attr>  
+   	<proc attr> ::= <intent>  
+   	<proc attr> ::= OPTIONAL  
+   	<proc attr> ::= POINTER  
+   	<proc attr> ::= SAVE  
+   	<proc attr> ::= PASS  
+   	<proc attr> ::= PASS ( <ident> )  
+   	<proc attr> ::= NOPASS  
+   	<proc attr> ::= PROTECTED
+   	<proc dcl list> ::= <proc dcl list> , <proc dcl>  
+   	<proc dcl list> ::= <proc dcl>
+   	<proc dcl> ::= <ident>  
+   	<proc dcl> ::= <ident> '=>' <id> ( )  
+   	<proc dcl> ::= <ident> '=>' <id>
+   	<type bound procedure> ::= <tprocedure> <opt attr> <binding name list>
+   	<tprocedure> ::= TPROCEDURE <opt interface name> <opt binding attr list>
+   	<opt interface name>  
+   	<opt interface name> ::= ( <id> )
+   	<opt binding attr list>  
+   	<opt binding attr list> ::= , <binding attr list>
+   	<binding attr list> ::= <binding attr list> , <binding attr>  
+   	<binding attr list> ::= <binding attr>
+   	<binding attr> ::= <id name>  
+   	<binding attr> ::= <id name> ( <id> )
+   	<binding name list> ::= <binding name list> , <binding name>  
+   	<binding name list> ::= <binding name>
+   	<binding name> ::=  <id>  
+   	<binding name> ::= <id> '=>' <id>
+   	<accel decl begin> 
+   	<accel decl list> ::= <accel decl list> <opt comma> <accel decl attr>  
+   	<accel decl list> ::= <accel decl attr>
+   	<accel decl attr> ::= COPYIN ( <accel decl data list> )  
+   	<accel decl attr> ::= COPYOUT ( <accel decl data list> )  
+   	<accel decl attr> ::= LOCAL ( <accel decl data list> )  
+   	<accel decl attr> ::= COPY ( <accel decl data list> )  
+   	<accel decl attr> ::= MIRROR ( <accel mdecl data list> )  
+   	<accel decl attr> ::= REFLECTED ( <accel mdecl data list> )  
+   	<accel decl attr> ::= CREATE ( <accel decl data list> )  
+   	<accel decl attr> ::= PRESENT ( <accel decl data list> )  
+   	<accel decl attr> ::= PCOPY ( <accel decl data list> )  
+   	<accel decl attr> ::= PCOPYIN ( <accel decl data list> )  
+   	<accel decl attr> ::= PCOPYOUT ( <accel decl data list> )  
+   	<accel decl attr> ::= PLOCAL ( <accel decl data list> )  
+   	<accel decl attr> ::= PCREATE ( <accel decl data list> )  
+   	<accel decl attr> ::= DEVICEPTR ( <accel mdecl data list> )  
+   	<accel decl attr> ::= DEVICE_RESIDENT ( <accel decl data list> )  
+   	<accel decl attr> ::= LINK ( <accel decl data list> )
+   	<accel decl data list> ::= <accel decl data list> , <accel decl data>  
+   	<accel decl data list> ::= <accel decl data>
+   	<accel decl data> ::= <accel decl data name> ( <accel decl sub list> )  
+   	<accel decl data> ::= <accel decl data name>  
+   	<accel decl data> ::= <constant>  
+   	<accel decl data> ::= <common>
+   	<accel mdecl data> ::= <accel mdecl data name> ( <accel decl sub list> )  
+   	<accel mdecl data> ::= <accel mdecl data name>  
+   	<accel mdecl data> ::= <constant>
+   	<accel mdecl data list> ::= <accel mdecl data list> , <accel mdecl data>  
+   	<accel mdecl data list> ::= <accel mdecl data>
+   	<accel decl sub list> ::= <accel decl sub list> , <accel decl sub>  
+   	<accel decl sub list> ::= <accel decl sub>
+   	<accel decl sub> ::= <opt sub> : <opt sub>  
+   	<accel decl sub> ::= <expression>
+   	<accel routine list>  
+   	<accel routine list> ::= <accel routine list> <opt comma> GANG  
+   	<accel routine list> ::= <accel routine list> <opt comma> WORKER  
+   	<accel routine list> ::= <accel routine list> <opt comma> VECTOR  
+   	<accel routine list> ::= <accel routine list> <opt comma> SEQ  
+   	<accel routine list> ::= <accel routine list> <opt comma> NOHOST  
+   	<accel routine list> ::= <accel routine list> <opt comma> BIND ( <ident> )  
+   	<accel routine list> ::= <accel routine list> <opt comma> BIND ( <quoted string> )  
+   	<accel routine list> ::= <accel routine list> <opt comma> DEVICE_TYPE ( <devtype list> )  
+   	<accel routine list> ::= <accel routine list> <opt comma> GANG ( <ident> : <expression> )  
+   	<accel routine list> ::= <accel routine list> <opt comma> EXCLUDE
+   	<devtype list> ::= <devtype list> , <devtype attr>  
+   	<devtype list> ::= <devtype attr>
+   	<devtype attr> ::= @  
+   	<devtype attr> ::= <ident>
+   	<generic type procedure> ::= GENERIC <opt gen access spec> :: <generic binding>
+   	<opt gen access spec>  
+   	<opt gen access spec> ::= , <gen access spec>
+   	<gen access spec> ::= <id name>
+   	<generic binding> ::= <generic spec> '=>' <generic binding list>
+   	<generic binding name> ::= <id>
+   	<generic binding list> ::= <generic binding name>  
+   	<generic binding list> ::= <generic binding list>, <generic binding name>
+   	<final subroutines> ::= FINAL <opt attr> <final list>
+   	<final list> ::= <final list> , <final>  
+   	<final list> ::= <final>
+   	<final> ::= <id>
+   	<opt tpsl>  
+   	<opt tpsl> ::= ( <type param spec list> )
+   	<type param spec list> ::= <type param spec list> , <id>  
+   	<type param spec list> ::= <id>
+   	<opt derived type spec>  
+   	<opt derived type spec> ::= ( <type param decl list> )
+   	<type param decl list> ::= <type param value>  
+   	<type param decl list> ::= <type param decl list> , <type param value>
+   	<type param value> ::= <expression>  
+   	<type param value> ::= <id name> = <expression>  
+   	<type param value> ::= :  
+   	<type param value> ::= <id name> = :  
+   	<type param value> ::= @  
+   	<type param value> ::= <id name> = @
+   	<opt comma>  
+   	<opt comma> ::= ,
+   	<mp decl begin> 
+   	<mp decl> ::= <mp declaresimd> <declare simd>  
+   	<mp decl> ::= <mp declaretarget> <declare target>  
+   	<mp decl> ::= <declarered begin> <declare reduction>
+   	<declarered begin> ::= <mp declarereduction>
+   	<declare reduction> ::= ( <reduc op> : <type list> : <red comb> ) <opt red init>
+   	<type list> ::= <type list> , <red type>  
+   	<type list> ::= <red type>
+   	<red comb> ::= <id name> = <expression>  
+   	<red comb> ::= <id name> ( <ssa list> )
+   	<opt red init>  
+   	<opt red init> ::= <id name> = <expression>   
+   	<opt red init> ::= <id name> ( <ssa list> )
+   	<expression> ::= <primary>    
+   	<expression> ::= <addition>   
+   	<expression> ::= <multiplication>  
+   	<expression> ::= <exponentiation>  
+   	<expression> ::= <disjunction>  
+   	<expression> ::= <conjunction>  
+   	<expression> ::= <eqv or neqv>  
+   	<expression> ::= <log negation>  
+   	<expression> ::= <concatenation>  
+   	<expression> ::= <relation>      
+   	<expression> ::= <defined binary>  
+   	<expression> ::= <defined unary>
+   	<primary> ::=    <var ref>   
+   	<primary> ::= <constant>  
+   	<primary> ::= %LOC ( <expression> )  
+   	<primary> ::= <elp> <expression> )  
+   	<primary> ::= <ac beg> <ac spec> <ac end>  
+   	<primary> ::= <substring>
+   	<ac beg> ::= '(/'
+   	<ac end> ::= '/)'
+   	<elp> ::= (
+   	<ac spec>  
+   	<ac spec> ::= <ac list>  
+   	<ac spec> ::= <type spec> :: <ac list>  
+   	<ac spec> ::= <type spec> ::
+   	<ac list> ::= <ac list> , <ac item>  
+   	<ac list> ::= <ac item>
+   	<ac item> ::= <expression>  
+   	<ac item> ::= <elp> <ac list> , <implied do control> )  
+   	<ac item> ::= <expression> : <expression> <opt stride>  
+   	<ac item> ::= <elp> <ac list> , <expression> )
+   	<implied do control> ::= <var ref> <idc eq> <etmp exp> , <etmp exp> <etmp e3>
+   	<idc eq> ::= =
+   	<etmp exp> ::= <etmp> <expression>
+   	<etmp e3>  
+   	<etmp e3> ::= , <etmp exp>
+   	<etmp> 
+   	<etmp lp> ::= (
+   	<var ref list> ::= <var ref list> , <var ref>  
+   	<var ref list> ::= <var ref>
+   	<dvar ref> ::=   <ident>   
+   	<dvar ref> ::= <dvar ref> ( <ssa list> )   
+   	<dvar ref> ::= <dvar ref> . <id>  
+   	<dvar ref> ::= <dvar ref> % <id>  
+   	<dvar ref> ::= <dvar ref> %LOC
+   	<var ref> ::=    <ident>   
+   	<var ref> ::= <var primary ssa> ( )   
+   	<var ref> ::= <var primary ssa> ( <ssa list> )   
+   	<var ref> ::= <var primary> . <id>  
+   	<var ref> ::= <var primary> % <id>  
+   	<var ref> ::= <var primary> %LOC
+   	<var primary ssa> ::= <var primary>
+   	<var primary> ::= <var ref>
+   	<ssa list> ::= <ssa list> , <ssa>  
+   	<ssa list> ::= <ssa>
+   	<ssa> ::= <expression>  
+   	<ssa> ::= <id name> = <expression>  
+   	<ssa> ::= <opt sub> : <opt sub> <opt stride>  
+   	<ssa> ::= <arg builtin>  
+   	<ssa> ::= @ <reflabel>  
+   	<ssa> ::= & <reflabel>
+   	<accel data ss> ::= <accel data name> ( <accel sub list> )
+   	<accel data name> ::= <ident>  
+   	<accel data name> ::= <accel data name> % <id>  
+   	<accel data name> ::= <accel data ss> % <id>
+   	<accel decl data ss> ::= <accel decl data name> ( <accel decl sub list> )
+   	<accel mdecl data ss> ::= <accel mdecl data name> ( <accel decl sub list> )
+   	<accel decl data name> ::= <ident>  
+   	<accel decl data name> ::= <accel decl data name> % <id>  
+   	<accel decl data name> ::= <accel decl data ss> % <id>
+   	<accel mdecl data name> ::= <ident>  
+   	<accel mdecl data name> ::= <accel mdecl data name> % <id>  
+   	<accel mdecl data name> ::= <accel mdecl data ss> % <id>
+   	<accel mdata ss> ::= <accel mdata name> ( <accel sub list> )
+   	<accel mdata name> ::= <ident>  
+   	<accel mdata name> ::= <accel mdata name> % <id>  
+   	<accel mdata name> ::= <accel mdata ss> % <id>
+   	<accel sdata name> ::= <ident>
+   	<arg builtin> ::= % <id name> ( <expression> )
+   	<opt sub>  
+   	<opt sub> ::= <expression>
+   	<opt stride>  
+   	<opt stride> ::= : <expression>
+   	<constant> ::=   <integer>   
+   	<constant> ::= <int kind const>  
+   	<constant> ::= <half>      
+   	<constant> ::= <real>      
+   	<constant> ::= <double>    
+   	<constant> ::= <quad>      
+   	<constant> ::= <complex>   
+   	<constant> ::= <dcomplex>  
+   	<constant> ::= <qcomplex>  
+   	<constant> ::= <nondec const>   
+   	<constant> ::= <nonddec const>  
+   	<constant> ::= <Hollerith>      
+   	<constant> ::= <log const>      
+   	<constant> ::= <log kind const>     
+   	<constant> ::= <char literal>  
+   	<constant> ::= <kanji string>   
+   	<constant> ::= <elp> <expression> <cmplx comma> <expression> )
+   	<char literal> ::= <quoted string>  
+   	<char literal> ::= <id> <underscore> <quoted string>  
+   	<char literal> ::= <integer> <underscore> <quoted string>
+   	<substring> ::= <char literal> ( <opt sub> : <opt sub> )  
+   	<substring> ::= <kanji string>  ( <opt sub> : <opt sub> )
+   	<arith expr> ::= <addition>  
+   	<arith expr> ::= <term>
+   	<addition>   ::= <arith expr> <addop> <term>  
+   	<addition> ::= <arith expr> <addop> <new term>  
+   	<addition> ::= <new term>
+   	<addop> ::= +  
+   	<addop> ::= -
+   	<addop list> ::= <addop list> <addop>  
+   	<addop list> ::= <addop>
+   	<term>  ::= <multiplication>  
+   	<term> ::= <factor>
+   	<new term> ::= <addop list> <term>
+   	<multiplication> ::= <term> <mult op> <factor>  
+   	<multiplication> ::= <term> <mult op> <new factor>
+   	<mult op> ::= @  
+   	<mult op> ::= /
+   	<factor> ::= <exponentiation>  
+   	<factor> ::= <primary>  
+   	<factor> ::= <defined unary>
+   	<defined unary> ::= <defined op> <primary>
+   	<new factor> ::= <addop list> <factor>
+   	<exponentiation> ::= <primary> @@ <factor>  
+   	<exponentiation> ::= <primary> @@ <new factor>
+   	<log expr> ::= <log disjunct>  
+   	<log expr> ::= <eqv or neqv>
+   	<eqv or neqv> ::= <log expr> <n eqv op> <log disjunct>
+   	<log disjunct> ::= <disjunction>  
+   	<log disjunct> ::= <log term>
+   	<disjunction> ::= <OR opr1> .OR. <log term>  
+   	<disjunction> ::= <OR opr1> .O. <log term>
+   	<OR opr1>     ::= <log disjunct>
+   	<log term> ::= <conjunction>  
+   	<log term> ::= <log factor>
+   	<conjunction> ::= <AND opr1> .AND. <log factor>
+   	<AND opr1> ::=  <log term>
+   	<log factor> ::= <log negation>  
+   	<log factor> ::= <rel operand>   
+   	<log factor> ::= <relation>
+   	<log negation> ::= .NOT. <log factor>  
+   	<log negation> ::= .N. <log factor>
+   	<relation> ::= <rel operand> <relop> <rel operand>
+   	<rel operand> ::= <primary>  
+   	<rel operand> ::= <exponentiation>  
+   	<rel operand> ::= <multiplication>  
+   	<rel operand> ::= <addition>  
+   	<rel operand> ::= <concatenation>
+   	<relop> ::= .EQ.  
+   	<relop> ::= .GE.  
+   	<relop> ::= .GT.  
+   	<relop> ::= .LE.  
+   	<relop> ::= .LT.  
+   	<relop> ::= .NE.
+   	<char expr> ::= <arith expr>  
+   	<char expr> ::= <concatenation>
+   	<concatenation> ::= <char expr> '//' <arith expr>
+   	<defined binary> ::= <expression> <defined op> <log expr>
+   	<simple stmt> ::= <assignment>  
+   	<simple stmt> ::= <assigned GOTO>  
+   	<simple stmt> ::= <GOTO assignment>  
+   	<simple stmt> ::= <computed GOTO>  
+   	<simple stmt> ::= <arith IF>  
+   	<simple stmt> ::= <call>      
+   	<simple stmt> ::= <return>    
+   	<simple stmt> ::= CONTINUE    
+   	<simple stmt> ::= <stop stmt>  
+   	<simple stmt> ::= <pause stmt>  
+   	<simple stmt> ::= <allocation stmt>  
+   	<simple stmt> ::= <IO stmt>  
+   	<simple stmt> ::= <exit stmt>  
+   	<simple stmt> ::= <cycle stmt>  
+   	<simple stmt> ::= <pointer assignment>  
+   	<simple stmt> ::= <nullify stmt>  
+   	<simple stmt> ::= <where clause> <assignment>  
+   	<simple stmt> ::= <forall clause> <forall assn stmt>  
+   	<simple stmt> ::= <smp stmt>  
+   	<simple stmt> ::= <pragma stmt>  
+   	<simple stmt> ::= <accel stmt>  
+   	<simple stmt> ::= <kernel stmt>  
+   	<simple stmt> ::= <error stop stmt>
+   	<assignment> ::= <psfunc> <var ref> <psfunc> = <expression>
+   	<psfunc> 
+   	<assigned GOTO> ::= GOTOX <ident> <optional comma> ( <label list> )  
+   	<assigned GOTO> ::= GOTOX <ident>
+   	<label list> ::= <label list> , <reflabel>  
+   	<label list> ::= <reflabel>
+   	<reflabel> ::= <label>
+   	<label> ::= <integer>
+   	<GOTO assignment> ::= ASSIGN <reflabel> TO <var ref>
+   	<computed GOTO> ::= GOTOX ( <label list> ) <optional comma> <etmp exp>
+   	<arith IF> ::= <arith> <reflabel> , <reflabel> <opt aif label>
+   	<opt aif label>  
+   	<opt aif label> ::= , <reflabel>
+   	<arith> ::= <if construct> <etmp lp> <expression> )
+   	<call> ::= CALL <cvar ref>  
+   	<call> ::= CALL <ident> <chevron>   
+   	<call> ::= CALL <ident> <chevron> ( )  
+   	<call> ::= CALL <ident> <chevron> ( <arg list> )
+   	<cvar ref> ::= <ident>   
+   	<cvar ref> ::= <var primary ssa> ( )   
+   	<cvar ref> ::= <var primary ssa> ( <ssa list> )   
+   	<cvar ref> ::= <var primary> . <id>  
+   	<cvar ref> ::= <var primary> % <id>  
+   	<cvar ref> ::= <var primary> %LOC
+   	<chevron> ::= '<<<' <expression list> '>>>'
+   	<expression list> ::= <expression list> , <expression>  
+   	<expression list> ::= @  
+   	<expression list> ::= <expression>
+   	<arg list> ::= <arg list> , <arg>  
+   	<arg list> ::= <arg>
+   	<arg> ::=      <expression>  
+   	<arg> ::= <id name> = <expression>  
+   	<arg> ::= @ <reflabel>  
+   	<arg> ::= & <reflabel>  
+   	<arg> ::= <arg builtin>
+   	<return> ::=   RETURN  
+   	<return> ::= RETURN <expression>
+   	<stop stmt> ::= STOP <stop pause>
+   	<quiet clause> ::= QUIET = <expression>
+   	<error stop stmt> ::= ERRORSTOP <error stop pause>  
+   	<error stop stmt> ::= ERRORSTOP <error stop pause> , <quiet clause>
+   	<error stop pause> ::=      
+   	<error stop pause> ::= <expression>
+   	<pause stmt> ::= PAUSE <stop pause>
+   	<stop pause>  
+   	<stop pause> ::= <expression>
+   	<GOTO stmt>  ::= GOTO <reflabel>
+   	<IF clause>  ::= <if construct> <etmp lp> <expression> )
+   	<if construct> ::= IF  
+   	<if construct> ::= <check construct> : IF
+   	<check construct> ::= <named construct>
+   	<control stmt> ::= <IF clause> <simple stmt>   
+   	<control stmt> ::= <if construct> <etmp lp> <expression> ) GOTO <reflabel>  
+   	<control stmt> ::= <if construct> <etmp lp> <expression> ) THEN   
+   	<control stmt> ::= <elseif> <expression> ) THEN <construct name>   
+   	<control stmt> ::= ELSE <construct name>   
+   	<control stmt> ::= ENDIF <construct name>  
+   	<control stmt> ::= <do begin> <loop control>  
+   	<control stmt> ::= <do begin>  
+   	<control stmt> ::= ENDDO <construct name>  
+   	<control stmt> ::= <where clause>  
+   	<control stmt> ::= <elsewhere clause>  
+   	<control stmt> ::= ENDWHERE <construct name>  
+   	<control stmt> ::= <forall clause>  
+   	<control stmt> ::= ENDFORALL <construct name>  
+   	<control stmt> ::= <case begin>  
+   	<control stmt> ::= <case> <elp> <case value list> ) <construct name>  
+   	<control stmt> ::= CASEDEFAULT <construct name>  
+   	<control stmt> ::= ENDSELECT <construct name>  
+   	<control stmt> ::= <associate stmt>  
+   	<control stmt> ::= ENDASSOCIATE <construct name>  
+   	<control stmt> ::= <select type stmt>  
+   	<control stmt> ::= <type guard stmt>
+   	<associate stmt> ::=	ASSOCIATE ( <association list> )  
+   	<associate stmt> ::= <check construct> : ASSOCIATE ( <association list> )
+   	<association list> ::=	<association>  
+   	<association list> ::= <association list> , <association>
+   	<association> ::=	<id> '=>' <expression>
+   	<select type stmt> ::= SELECTTYPE ( <assoc or selector> )  
+   	<select type stmt> ::= <check construct> : SELECTTYPE ( <assoc or selector> )
+   	<assoc or selector> ::= <association>  
+   	<assoc or selector> ::= <expression>
+   	<type guard stmt> ::= <typeis stmt>  
+   	<type guard stmt> ::= <classis stmt>  
+   	<type guard stmt> ::= <classdefault stmt>
+   	<typeis stmt> ::= TYPEIS ( <typespec> ) <construct name>
+   	<typespec> ::= <intrinsic type>  
+   	<typespec> ::= <derived type spec>
+   	<derived type spec> ::= <type name>  
+   	<derived type spec> ::= <pdt>
+   	<type name> ::= <ident>
+   	<pdt> ::= <type name> ( <pdt param list> )
+   	<pdt param list> ::= <pdt param list> , <pdt param>  
+   	<pdt param list> ::= <pdt param>
+   	<pdt param> ::= <expression>  
+   	<pdt param> ::= <id name> = <expression>  
+   	<pdt param> ::= :  
+   	<pdt param> ::= <id name> = :  
+   	<pdt param> ::= @  
+   	<pdt param> ::= <id name> = @
+   	<classis stmt> ::= CLASSIS ( <typespec> ) <construct name>
+   	<classdefault stmt> ::= CLASSDEFAULT <construct name>
+   	<elseif> ::= ELSEIF <etmp lp>
+   	<do begin> ::= <do construct> <label>  
+   	<do begin> ::= <do construct>
+   	<do construct> ::= DO  
+   	<do construct> ::= <check construct> : DO
+   	<loop control> ::= <opt comma> <var ref> = <etmp exp> , <etmp exp> <etmp e3>  
+   	<loop control> ::= <dowhile> <etmp lp> <expression> )  
+   	<loop control> ::= <doconcurrent> <concurrent header> <concurrent locality>
+   	<dowhile> ::= <opt comma> WHILE
+   	<doconcurrent> ::= <opt comma> CONCURRENT
+   	<concurrent header> ::= ( <concurrent type> <concurrent list> <opt mask expr> )
+   	<concurrent type>  
+   	<concurrent type> ::= <intrinsic type> ::
+   	<concurrent list> ::= <concurrent list> , <concurrent control>  
+   	<concurrent list> ::= <concurrent control>
+   	<concurrent control> ::= <var ref> = <expression> : <expression> <opt stride>
+   	<opt mask expr>  
+   	<opt mask expr> ::= , <mask expr>
+   	<concurrent locality>  
+   	<concurrent locality> ::= <locality spec list>
+   	<locality spec list> ::= <locality spec list> <locality spec>  
+   	<locality spec list> ::= <locality spec>
+   	<locality spec> ::= <locality kind> ( <locality name list> )  
+   	<locality spec> ::= DEFAULT ( NONE )
+   	<locality kind> ::= LOCAL  
+   	<locality kind> ::= LOCAL_INIT  
+   	<locality kind> ::= SHARED
+   	<locality name list> ::= <locality name list> , <ident>  
+   	<locality name list> ::= <ident>
+   	<elsewhere clause> ::= ELSEWHERE <construct name>  
+   	<elsewhere clause> ::= ELSEWHERE ( <mask expr> ) <construct name>
+   	<where clause> ::= <where construct> ( <mask expr> )
+   	<where construct> ::= WHERE  
+   	<where construct> ::= <check construct> : WHERE
+   	<mask expr> ::= <expression>
+   	<allocation stmt> ::= ALLOCATE ( <alloc list> <alloc cntl> )  
+   	<allocation stmt> ::= ALLOCATE ( <alloc type> :: <alloc list> <alloc cntl> )  
+   	<allocation stmt> ::= DEALLOCATE ( <alloc list> <alloc cntl> )
+   	<alloc type> ::= <type spec>
+   	<alloc list> ::= <alloc list> , <alloc object>  
+   	<alloc list> ::= <alloc object>
+   	<alloc object> ::= <alloc obj>
+   	<alloc obj> ::= <ident>  
+   	<alloc obj> ::= <alloc obj> ( <ssa list> )  
+   	<alloc obj> ::= <alloc obj> % <id>  
+   	<alloc obj> ::= <alloc obj> %LOC  
+   	<alloc obj> ::= <alloc obj> ( <ssa list> ) :: <ident>
+   	<alloc cntl>  
+   	<alloc cntl> ::= <alloc cntl list>
+   	<alloc cntl list> ::= <alloc cntl list> <alloc cntl item>  
+   	<alloc cntl list> ::= <alloc cntl item>
+   	<alloc cntl item> ::= , PINNED = <var ref>  
+   	<alloc cntl item> ::= , STAT = <var ref>  
+   	<alloc cntl item> ::= , ERRMSG  = <var ref>  
+   	<alloc cntl item> ::= , SOURCE = <expression>  
+   	<alloc cntl item> ::= , MOLD = <expression>  
+   	<alloc cntl item> ::= , ALIGN = <expression>
+   	<forall clause> ::= <forall begin> <concurrent header>
+   	<forall begin> ::= <forall construct>
+   	<forall construct> ::= FORALL  
+   	<forall construct> ::= <check construct> : FORALL
+   	<null stmt> 
+   	<exit stmt> ::= EXIT <construct name>
+   	<construct name>  
+   	<construct name> ::= <id>
+   	<cycle stmt> ::= CYCLE <construct name>
+   	<case begin> ::= SELECTCASE <etmp lp> <expression> )  
+   	<case begin> ::= <check construct> : SELECTCASE <etmp lp> <expression> )
+   	<case> ::= CASE
+   	<case value list> ::= <case value list> , <case value>  
+   	<case value list> ::= <case value>
+   	<case value> ::= <case expr>    
+   	<case value> ::= <case expr> :  
+   	<case value> ::= : <case expr>  
+   	<case value> ::= <case expr> : <case expr>
+   	<case expr> ::= <expression>
+   	<pointer assignment> ::= <psfunc> <var ref> <psfunc> '=>' <expression>
+   	<nullify stmt> ::= NULLIFY ( <nullify list> )
+   	<nullify list> ::= <nullify list> , <nullify object>  
+   	<nullify list> ::= <nullify object>
+   	<nullify object> ::= <var ref>
+   	<forall assn stmt> ::= <assignment>  
+   	<forall assn stmt> ::= <pointer assignment>
+   	<pragma stmt> ::= PREFETCH <var ref list>  
+   	<pragma stmt> ::= DISTRIBUTEPOINT  
+   	<pragma stmt> ::= DISTRIBUTE
+   	<null>    
+   	<write>   
+   	<read>    
+   	<IO stmt> ::= <null>  BACKSPACE <unit info>               
+   	<IO stmt> ::= <null>  ENDFILE <unit info>                 
+   	<IO stmt> ::= <null>  REWIND <unit info>                  
+   	<IO stmt> ::= <null>  CLOSE <iolp> <spec list> )          
+   	<IO stmt> ::= <null>  OPEN <iolp> <spec list> )           
+   	<IO stmt> ::= <null>  INQUIRE <iolp> <spec list> )        
+   	<IO stmt> ::= <write> WRITE <io spec>          
+   	<IO stmt> ::= <write> WRITE <io spec> <output list> 
+   	<IO stmt> ::= <write> PRINT <print spec>                  
+   	<IO stmt> ::= <write> PRINT <print spec> , <output list>  
+   	<IO stmt> ::= <read>  READ <io spec> <input list>      
+   	<IO stmt> ::= <read>  READ <read spec2>                   
+   	<IO stmt> ::= <read>  READ <read spec3> , <input list>    
+   	<IO stmt> ::= <read>  ACCEPT <read spec4>                 
+   	<IO stmt> ::= <read>  ACCEPT <read spec3> , <input list>  
+   	<IO stmt> ::= <write> ENCODE <encode spec> <optional comma> <output list>  
+   	<IO stmt> ::= <write> ENCODE <encode spec>                
+   	<IO stmt> ::= <read>  DECODE <encode spec> <optional comma> <input list>   
+   	<IO stmt> ::= <read>  DECODE <encode spec>                
+   	<IO stmt> ::= <null>  INQUIRE <iolp> IOLENGTH = <var ref> ) <output list>  
+   	<IO stmt> ::= <null>  WAIT <iolp> <spec list> )  
+   	<IO stmt> ::= <null>  FLUSH <unit info>
+   	<unit info> ::= <unit id>  
+   	<unit info> ::= <iolp> <unit data list> )  
+   	<unit info> ::= <iolp> <unit id> )
+   	<unit data list> ::= <unit data list> , <unit data>  
+   	<unit data list> ::= <unit id> , <unit data>  
+   	<unit data list> ::= <unit data>
+   	<unit data> ::= UNIT = <unit id>  
+   	<unit data> ::= ERR = <reflabel>  
+   	<unit data> ::= IOSTAT = <var ref>  
+   	<unit data> ::= IOMSG = <var ref>   
+   	<unit data> ::= NEWUNIT = <var ref>
+   	<unit id> ::= <expression>  
+   	<unit id> ::= @
+   	<spec list> ::= <spec list> , <spec item>  
+   	<spec list> ::= <spec item>
+   	<spec item> ::= <unit data>  
+   	<spec item> ::= STATUS = <expression>   
+   	<spec item> ::= FILE = <expression>     
+   	<spec item> ::= NAME = <expression>     
+   	<spec item> ::= ACCESS = <expression>   
+   	<spec item> ::= FORM = <expression>     
+   	<spec item> ::= RECL = <expression>     
+   	<spec item> ::= BLANK = <expression>    
+   	<spec item> ::= DISPOSE = <expression>  
+   	<spec item> ::= READONLY                
+   	<spec item> ::= READ = <var ref>        
+   	<spec item> ::= WRITE = <var ref>       
+   	<spec item> ::= READWRITE = <var ref>    
+   	<spec item> ::= ACTION = <expression>    
+   	<spec item> ::= DELIM = <expression>     
+   	<spec item> ::= PAD = <expression>       
+   	<spec item> ::= POSITION = <expression>  
+   	<spec item> ::= EXIST = <var ref>   
+   	<spec item> ::= OPENED = <var ref>  
+   	<spec item> ::= NUMBER = <var ref>  
+   	<spec item> ::= NAMED = <var ref>   
+   	<spec item> ::= SEQUENTIAL = <var ref>   
+   	<spec item> ::= DIRECT = <var ref>       
+   	<spec item> ::= FORMATTED = <var ref>    
+   	<spec item> ::= UNFORMATTED = <var ref>  
+   	<spec item> ::= NEXTREC = <var ref>      
+   	<spec item> ::= FMT = <format id>  
+   	<spec item> ::= REC = <expression>  
+   	<spec item> ::= End = <reflabel>  
+   	<spec item> ::= NML = <ident>  
+   	<spec item> ::= <expression>  
+   	<spec item> ::= @  
+   	<spec item> ::= ADVANCE = <expression>  
+   	<spec item> ::= EOR = <reflabel>  
+   	<spec item> ::= CONVERT = <expression>  
+   	<spec item> ::= SHARED  
+   	<spec item> ::= ID = <var ref>               
+   	<spec item> ::= PENDING = <var ref>          
+   	<spec item> ::= POS = <expression>           
+   	<spec item> ::= SIZE = <var ref>             
+   	<spec item> ::= ASYNCHRONOUS = <expression>  
+   	<spec item> ::= DECIMAL = <expression>       
+   	<spec item> ::= ENCODING = <expression>      
+   	<spec item> ::= SIGN = <expression>          
+   	<spec item> ::= STREAM = <var ref>	     
+   	<spec item> ::= ROUND = <expression>
+   	<format id> ::= <expression>  
+   	<format id> ::= @
+   	<fid or nid> ::= <expression>  
+   	<fid or nid> ::= @
+   	<print spec> ::= <fid or nid>
+   	<io spec> ::= <iolp> <spec list> ) <optional comma>
+   	<read spec2> ::= <iolp> <spec list> )  
+   	<read spec2> ::= <fid or nid>
+   	<read spec3> ::= <format id>
+   	<read spec4> ::= <fid or nid>
+   	<encode spec> ::= <iolp> <encode unit> <encode ctl> )
+   	<encode unit> ::= <expression> , <format id> , <var ref>
+   	<encode ctl>  
+   	<encode ctl> ::= , <spec list>
+   	<output list> ::= <output list> , <output item>  
+   	<output list> ::= <elp> <output list> , <output item> )  
+   	<output list> ::= <output item>
+   	<output item> ::= <expression>  
+   	<output item> ::= <elp> <output list> , <implied do control> )
+   	<input list> ::= <input list> , <input item>  
+   	<input list> ::= <input item>
+   	<input item> ::= <var ref>  
+   	<input item> ::= <elp> <input list> )  
+   	<input item> ::= <elp> <input list> , <implied do control> )
+   	<format stmt> ::= <format> ( <format list> )  
+   	<format stmt> ::= <format> ( )  
+   	<format stmt> ::= FORMAT <fmtstr>  
+   	<format stmt> ::= <format> ( <format list unl> )
+   	<format> ::= FORMAT
+   	<format list> ::= <format list> <format item>  
+   	<format list> ::= <format item>  
+   	<format list> ::= <format list unl> <unlimited format item>  
+   	<format list> ::= <format list unl> <format item>
+   	<format list unl> ::= <format list> <unlimited format item>  
+   	<format list unl> ::= <unlimited format item>
+   	<format item> ::= ,   
+   	<format item> ::= <repeat factor> /   
+   	<format item> ::= :   
+   	<format item> ::= <char literal>   
+   	<format item> ::= <kanji string>   
+   	<format item> ::= <Hollerith>   
+   	<format item> ::= <repeat factor> <F1 item>  
+   	<format item> ::= <repeat factor> <F2 item>  
+   	<format item> ::= <scale factor>   
+   	<format item> ::= <F3 item>
+   	<repeat factor>  
+   	<repeat factor> ::= <ffield>
+   	<scale factor> ::= <ffield> P   
+   	<scale factor> ::= <addop> <ffield> P
+   	<F1 item> ::= <flp> <format list> )  
+   	<F1 item> ::= I <ffield>  
+   	<F1 item> ::= I <ffield> . <ffield>  
+   	<F1 item> ::= A <ffield>  
+   	<F1 item> ::= N <ffield>  
+   	<F1 item> ::= L <ffield>  
+   	<F1 item> ::= O <ffield>  
+   	<F1 item> ::= O <ffield> . <ffield>  
+   	<F1 item> ::= Z <ffield>  
+   	<F1 item> ::= Z <ffield> . <ffield>  
+   	<F1 item> ::= <aformat>  
+   	<F1 item> ::= <nformat>  
+   	<F1 item> ::= <lformat>  
+   	<F1 item> ::= <iformat>  
+   	<F1 item> ::= <oformat>  
+   	<F1 item> ::= <zformat>  
+   	<F1 item> ::= B <ffield>  
+   	<F1 item> ::= B <ffield> . <ffield>  
+   	<F1 item> ::= <flp> <format list unl> )
+   	<flp> ::= (
+   	<F2 item> ::= F <ffield> . <ffield>  
+   	<F2 item> ::= E <ffield> . <ffield>  
+   	<F2 item> ::= G <ffield> . <ffield>  
+   	<F2 item> ::= E <ffield>  
+   	<F2 item> ::= D <ffield> . <ffield>  
+   	<F2 item> ::= <fformat>  
+   	<F2 item> ::= <eformat>  
+   	<F2 item> ::= <gformat>  
+   	<F2 item> ::= <dformat>  
+   	<F2 item> ::= EN <ffield> . <ffield>  
+   	<F2 item> ::= ES <ffield> . <ffield>  
+   	<F2 item> ::= <dtformat>  
+   	<F2 item> ::= DT <dts>  
+   	<F2 item> ::= <g0format>
+   	<dts> ::= <char literal>  
+   	<dts> ::= <char literal> <dlp> <dt vlist> )  
+   	<dts> ::= <dlp> <dt vlist> )
+   	<dt vlist> ::= <dt vlist> , <addop> <integer>  
+   	<dt vlist> ::= <dt vlist> , <integer>  
+   	<dt vlist> ::= <addop> <integer>  
+   	<dt vlist> ::= <integer>
+   	<F3 item> ::= T <ffield>   
+   	<F3 item> ::= TL <ffield>  
+   	<F3 item> ::= TR <ffield>  
+   	<F3 item> ::= <ffield> X   
+   	<F3 item> ::= X   
+   	<F3 item> ::= S   
+   	<F3 item> ::= SP  
+   	<F3 item> ::= SS  
+   	<F3 item> ::= BN  
+   	<F3 item> ::= BZ  
+   	<F3 item> ::= DC  
+   	<F3 item> ::= DP  
+   	<F3 item> ::= Q   
+   	<F3 item> ::= '$' 
+   	<F3 item> ::= RU  
+   	<F3 item> ::= RD  
+   	<F3 item> ::= RZ  
+   	<F3 item> ::= RN  
+   	<F3 item> ::= RC  
+   	<F3 item> ::= RP
+   	<ffield> ::= <integer>
+   	<unlimited format item> ::= <star repeat> <flp> <format list> )
+   	<star repeat> ::= @
+   	<declare simd> ::= <declare simd name> <opt par list>
+   	<declare simd name>  
+   	<declare simd name> ::= ( <id> )
+   	<declare target>  
+   	<declare target> ::= ( <ident list> )  
+   	<declare target> ::= <par list>
+   	<smp stmt> ::= <mp begin> <mp stmt>
+   	<mp begin> 
+   	<mp stmt> ::=	<par begin> <opt par list>   
+   	<mp stmt> ::= <mp endparallel>             
+   	<mp stmt> ::= <mp critical> <opt csident>  
+   	<mp stmt> ::= <mp endcritical> <opt csident>  
+   	<mp stmt> ::= <single begin> <opt par list>   
+   	<mp stmt> ::= <mp endsingle> <opt endsingle list>  
+   	<mp stmt> ::= <pdo begin> <opt par list>   
+   	<mp stmt> ::= <mp endpdo> <opt nowait>     
+   	<mp stmt> ::= <mp barrier>                 
+   	<mp stmt> ::= <mp master>	             
+   	<mp stmt> ::= <mp endmaster>               
+   	<mp stmt> ::= <mp atomic begin>  <opt atomic type>  
+   	<mp stmt> ::= <doacross begin> <opt par list>    
+   	<mp stmt> ::= <paralleldo begin> <opt par list>  
+   	<mp stmt> ::= <mp endpardo>  
+   	<mp stmt> ::= <parallelsections begin> <opt par list>  
+   	<mp stmt> ::= <mp endparsections>  
+   	<mp stmt> ::= <sections begin> <opt par list>  
+   	<mp stmt> ::= <mp section>  
+   	<mp stmt> ::= <mp endsections> <opt nowait>  
+   	<mp stmt> ::= <mp flush>  
+   	<mp stmt> ::= <mp flush> ( <ident list> )  
+   	<mp stmt> ::= <mp ordered> <opt ordered list>  
+   	<mp stmt> ::= <mp endordered>  
+   	<mp stmt> ::= <mp workshare>  
+   	<mp stmt> ::= <mp endworkshare> <opt nowait>  
+   	<mp stmt> ::= <parworkshare begin> <opt par list>  
+   	<mp stmt> ::= <mp endparworkshare>  
+   	<mp stmt> ::= <task begin> <opt par list>  
+   	<mp stmt> ::= <mp endtask>  
+   	<mp stmt> ::= <mp taskwait>  
+   	<mp stmt> ::= <mp taskyield>  
+   	<mp stmt> ::= <mp endatomic>  
+   	<mp stmt> ::= <taskloop begin> <opt par list>  
+   	<mp stmt> ::= <mp endtaskloop>  
+   	<mp stmt> ::= <taskloopsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtaskloopsimd>  
+   	<mp stmt> ::= <mp cancel> <id name> <opt par ifclause>  
+   	<mp stmt> ::= <dosimd begin> <opt par list>   
+   	<mp stmt> ::= <mp enddosimd> <opt nowait>  
+   	<mp stmt> ::= <simd begin> <opt par list>  
+   	<mp stmt> ::= <mp endsimd>  
+   	<mp stmt> ::= <targetdata begin> <opt par list>   
+   	<mp stmt> ::= <mp endtargetdata>  
+   	<mp stmt> ::= <targetenterdata begin> <opt par list>   
+   	<mp stmt> ::= <targetexitdata begin> <opt par list>   
+   	<mp stmt> ::= <targetupdate begin> <opt par list>  
+   	<mp stmt> ::= <target begin> <opt par list>  
+   	<mp stmt> ::= <mp endtarget>  
+   	<mp stmt> ::= <teams begin> <opt par list>  
+   	<mp stmt> ::= <mp endteams>  
+   	<mp stmt> ::= <distribute begin> <opt par list>  
+   	<mp stmt> ::= <mp enddistribute>  
+   	<mp stmt> ::= <distsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp enddistsimd>  
+   	<mp stmt> ::= <distpardo begin> <opt par list>  
+   	<mp stmt> ::= <mp enddistpardo>  
+   	<mp stmt> ::= <distpardosimd begin> <opt par list>  
+   	<mp stmt> ::= <mp enddistpardosimd>  
+   	<mp stmt> ::= <pardosimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endpardosimd>  
+   	<mp stmt> ::= <targpar begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargpar>  
+   	<mp stmt> ::= <targpardo begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargpardo>  
+   	<mp stmt> ::= <targparsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargparsimd>  
+   	<mp stmt> ::= <targpardosimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargpardosimd>  
+   	<mp stmt> ::= <targsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargsimd>  
+   	<mp stmt> ::= <targteams begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargteams>  
+   	<mp stmt> ::= <teamsdist begin> <opt par list>  
+   	<mp stmt> ::= <mp endteamsdist>  
+   	<mp stmt> ::= <teamsdistsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endteamsdistsimd>  
+   	<mp stmt> ::= <targteamsdist begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargteamsdist>  
+   	<mp stmt> ::= <targteamsdistsimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargteamsdistsimd>  
+   	<mp stmt> ::= <teamsdistpardo begin> <opt par list>  
+   	<mp stmt> ::= <mp endteamsdistpardo>  
+   	<mp stmt> ::= <targteamsdistpardo begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargteamsdistpardo>  
+   	<mp stmt> ::= <teamsdistpardosimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endteamsdistpardosimd>  
+   	<mp stmt> ::= <targteamsdistpardosimd begin> <opt par list>  
+   	<mp stmt> ::= <mp endtargteamsdistpardosimd>  
+   	<mp stmt> ::= <mp taskgroup>  
+   	<mp stmt> ::= <mp endtaskgroup>  
+   	<mp stmt> ::= <mp cancellationpoint> <id name>
+   	<opt csident>  
+   	<opt csident> ::= ( <id name> )
+   	<opt nowait>  
+   	<opt nowait> ::= <opt comma> <nowait>
+   	<opt atomic type>  
+   	<opt atomic type> ::= <pre seq_cst> UPDATE <post seq_cst>  
+   	<opt atomic type> ::= <pre seq_cst> READ <post seq_cst>  
+   	<opt atomic type> ::= <pre seq_cst> WRITE <post seq_cst>   
+   	<opt atomic type> ::= <pre seq_cst> CAPTURE <post seq_cst>  
+   	<opt atomic type> ::= <seq cst>
+   	<pre seq_cst>  
+   	<pre seq_cst> ::= <seq cst> <opt comma>
+   	<post seq_cst>  
+   	<post seq_cst> ::= <opt comma> <seq cst>
+   	<seq cst> ::= SEQ_CST
+   	<nowait> ::= NOWAIT
+   	<opt endsingle list>  
+   	<opt endsingle list> ::= <opt comma> <endsingle list>
+   	<endsingle list> ::= <endsingle list> <opt comma> <endsingle item>  
+   	<endsingle list> ::= <endsingle item>
+   	<endsingle item> ::= <nowait>  
+   	<endsingle item> ::= COPYPRIVATE ( <tp list> )
+   	<par begin> ::= <mp parallel>
+   	<opt par list>  
+   	<opt par list> ::= <opt comma> <par list>
+   	<par list> ::= <par list> <opt comma> <par attr>  
+   	<par list> ::= <par attr>
+   	<par attr> ::= DEFAULT ( <id name> )  
+   	<par attr> ::= <private list>       
+   	<par attr> ::= SHARED  ( <pflsr list> )  
+   	<par attr> ::= <firstprivate>  
+   	<par attr> ::= <lastprivate>  
+   	<par attr> ::= <schedule>  
+   	<par attr> ::= ORDERED <opt expression>  
+   	<par attr> ::= REDUCTION ( <reduction> )  
+   	<par attr> ::= <par ifclause>  
+   	<par attr> ::= COPYIN ( <cmn ident list> )  
+   	<par attr> ::= NUM_THREADS ( <expression> )  
+   	<par attr> ::= COLLAPSE ( <expression> )  
+   	<par attr> ::= UNTIED  
+   	<par attr> ::= FINAL ( <expression> )  
+   	<par attr> ::= MERGEABLE  
+   	<par attr> ::= PROC_BIND ( <id name> )  
+   	<par attr> ::= SAFELEN ( <expression> )  
+   	<par attr> ::= <linear clause>  
+   	<par attr> ::= <aligned clause>  
+   	<par attr> ::= SIMDLEN ( <expression> )  
+   	<par attr> ::= <uniform clause>  
+   	<par attr> ::= INBRANCH  
+   	<par attr> ::= NOTINBRANCH  
+   	<par attr> ::= LINK ( <ident list> )  
+   	<par attr> ::= DEVICE ( <expression> )  
+   	<par attr> ::= <map clause>  
+   	<par attr> ::= <depend clause>  
+   	<par attr> ::= IS_DEVICE_PTR ( <ident list> )  
+   	<par attr> ::= DEFAULTMAP ( <id name> : <id name> )  
+   	<par attr> ::= <motion clause>  
+   	<par attr> ::= DIST_SCHEDULE ( <id name> <opt distchunk> )  
+   	<par attr> ::= GRAINSIZE ( <expression> )  
+   	<par attr> ::= NUM_TASKS ( <expression> )  
+   	<par attr> ::= PRIORITY ( <expression> )  
+   	<par attr> ::= NUM_TEAMS ( <expression> )  
+   	<par attr> ::= THREAD_LIMIT ( <expression> )  
+   	<par attr> ::= NOGROUP
+   	<opt expression>  
+   	<opt expression> ::= ( <expression> )
+   	<opt ordered list>  
+   	<opt ordered list> ::= <ordered list>
+   	<ordered list> ::= <ordered list> <opt comma> <ordered attr>  
+   	<ordered list> ::= <ordered attr>
+   	<ordered attr> ::=  SIMD  
+   	<ordered attr> ::= THREADS  
+   	<ordered attr> ::= <depend clause>
+   	<pflsr list> ::= <pflsr list> , <cmn ident>  
+   	<pflsr list> ::= <cmn ident>
+   	<private list> ::= PRIVATE ( <pflsr list> )
+   	<firstprivate> ::= FIRSTPRIVATE ( <pflsr list> )
+   	<lastprivate> ::= LASTPRIVATE ( <pflsr list> )
+   	<schedule> ::= SCHEDULE <sched type>  
+   	<schedule> ::= MP_SCHEDTYPE = <id name>  
+   	<schedule> ::= CHUNK = <expression>
+   	<sched type>  
+   	<sched type> ::= ( <id name> <opt chunk> )
+   	<opt chunk>  
+   	<opt chunk> ::= , <expression>
+   	<opt distchunk>  
+   	<opt distchunk> ::= , <expression>
+   	<reduction> ::= <reduc op> : <pflsr list>  
+   	<reduction> ::= <pflsr list>
+   	<reduc op> ::= <addop>  
+   	<reduc op> ::= @        
+   	<reduc op> ::= .AND.    
+   	<reduc op> ::= .OR.     
+   	<reduc op> ::= .EQV.    
+   	<reduc op> ::= .NEQV.   
+   	<reduc op> ::= <ident>
+   	<par ifclause> ::= IF ( <expression> )  
+   	<par ifclause> ::= IF ( <id name> : <expression> )  
+   	<par ifclause> ::= IF ( <id name> <id name> : <expression> )  
+   	<par ifclause> ::= IF ( <id name> <id name> <id name> : <expression> )
+   	<opt par ifclause>  
+   	<opt par ifclause> ::= <opt comma> <par ifclause>
+   	<linear clause> ::= LINEAR ( <linear expr> )
+   	<linear expr> ::= <linear modifier> <linear opt step> 
+   	<linear modifier> ::= <pflsr list>  
+   	<linear modifier> ::= <id name> ( <pflsr list> )
+   	<linear opt step>  
+   	<linear opt step> ::= : <expression>
+   	<aligned clause> ::= ALIGNED ( <aligned> )
+   	<aligned> ::= <pflsr list>  
+   	<aligned> ::= <pflsr list> : <expression>
+   	<uniform clause> ::= UNIFORM ( <pflsr list> )
+   	<map clause> ::= MP_MAP ( <map item> )
+   	<map item> ::= <accel data list>  
+   	<map item> ::= <map type> : <accel data list>
+   	<map type> ::= <id name>  
+   	<map type> ::= ALWAYS <opt comma> <id name>
+   	<depend clause> ::= DEPEND ( <depend attr> )
+   	<depend attr> ::=  <id name>  
+   	<depend attr> ::= <id name> : <depend data list>
+   	<motion clause> ::= TO ( <var ref list> )  
+   	<motion clause> ::= FROM ( <var ref list> )
+   	<depend data list> ::= <var ref list>  
+   	<depend data list> ::= <depend data>
+   	<depend data> ::= <ident> <addop> <constant>
+   	<single begin> ::= <mp single>
+   	<pdo begin> ::= <mp pdo>
+   	<mp atomic begin> ::= <mp atomic>
+   	<doacross begin> ::= <mp doacross>
+   	<paralleldo begin> ::= <mp pardo>
+   	<parallelsections begin> ::= <mp parsections>
+   	<sections begin> ::= <mp sections>
+   	<parworkshare begin> ::= <mp parworkshare>
+   	<task begin> ::= <mp task>
+   	<dosimd begin> ::= <mp dosimd>
+   	<simd begin> ::= <mp simd>
+   	<targetdata begin> ::= <mp targetdata>
+   	<targetenterdata begin> ::= <mp targetenterdata>
+   	<targetexitdata begin> ::= <mp targetexitdata>
+   	<target begin> ::= <mp target>
+   	<targetupdate begin> ::= <mp targetupdate>
+   	<teams begin> ::= <mp teams>
+   	<distribute begin> ::= <mp distribute>
+   	<distsimd begin> ::= <mp distsimd>
+   	<distpardo begin> ::= <mp distpardo>
+   	<distpardosimd begin> ::= <mp distpardosimd>
+   	<pardosimd begin> ::= <mp pardosimd>
+   	<targpar begin> ::= <mp targpar>
+   	<targpardo begin> ::= <mp targpardo>
+   	<targparsimd begin> ::= <mp targparsimd>
+   	<targpardosimd begin> ::= <mp targpardosimd>
+   	<targsimd begin> ::= <mp targsimd>
+   	<targteams begin> ::= <mp targteams>
+   	<teamsdist begin> ::= <mp teamsdist>
+   	<teamsdistsimd begin> ::= <mp teamsdistsimd>
+   	<targteamsdist begin> ::= <mp targteamsdist>
+   	<targteamsdistsimd begin> ::= <mp targteamsdistsimd>
+   	<teamsdistpardo begin> ::= <mp teamsdistpardo>
+   	<targteamsdistpardo begin> ::= <mp targteamsdistpardo>
+   	<teamsdistpardosimd begin> ::= <mp teamsdistpardosimd>
+   	<targteamsdistpardosimd begin> ::= <mp targteamsdistpardosimd>
+   	<taskloop begin> ::= <mp taskloop>
+   	<taskloopsimd begin> ::= <mp taskloopsimd>
+   	<accel stmt> ::= <accel begin> ACCREGION <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCKERNELS <opt accel list>   
+   	<accel stmt> ::= <accel begin> PARALLEL <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCDATA <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCDATAREGION <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCDO <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCLOOP <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCREGIONDO <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCREGIONLOOP <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCKERNELSDO <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCKERNELSLOOP <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCPARALLELDO <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCPARALLELLOOP <opt accel list>   
+   	<accel stmt> ::= <accel begin> <accel update dir>  
+   	<accel stmt> ::= <accel begin> ACCENDREGION <opt end accel list>  
+   	<accel stmt> ::= <accel begin> ACCENDKERNELS  
+   	<accel stmt> ::= <accel begin> ACCENDKERNDO  
+   	<accel stmt> ::= <accel begin> ACCENDKERNLOOP  
+   	<accel stmt> ::= <accel begin> ACCENDPARALLEL  
+   	<accel stmt> ::= <accel begin> ACCENDPARDO  
+   	<accel stmt> ::= <accel begin> ACCENDPARLOOP  
+   	<accel stmt> ::= ACCENDDATAREGION  
+   	<accel stmt> ::= ACCENDDATA  
+   	<accel stmt> ::= <accel begin> ACCSCALARREGION <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCENDSCALARREGION  
+   	<accel stmt> ::= <accel begin> ACCSCALAR ACCREGION <opt accel list>   
+   	<accel stmt> ::= ACCENDSCALAR  
+   	<accel stmt> ::= <accel begin> ACCWAIT <opt wait list>  
+   	<accel stmt> ::= <accel begin> CACHE ( <accel data list> )  
+   	<accel stmt> ::= <accel begin> ACCHOSTDATA <opt accel list>  
+   	<accel stmt> ::= ACCENDHOSTDATA  
+   	<accel stmt> ::= <accel begin> ACCENTER ACCDATA <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCEXIT ACCDATA <opt accel list>  
+   	<accel stmt> ::= <accel begin> ACCENDLOOP  
+   	<accel stmt> ::= <accel begin> ACCENDDO  
+   	<accel stmt> ::= <accel begin> ACCATOMIC  
+   	<accel stmt> ::= <accel begin> ACCATOMICUPDATE  
+   	<accel stmt> ::= <accel begin> ACCATOMICREAD  
+   	<accel stmt> ::= <accel begin> ACCATOMICWRITE  
+   	<accel stmt> ::= <accel begin> ACCATOMICCAPTURE  
+   	<accel stmt> ::= <accel begin> ACCENDATOMIC  
+   	<accel stmt> ::= <accel begin> ACCINIT <opt accel init list>  
+   	<accel stmt> ::= <accel begin> ACCSHUTDOWN <opt accel shutdown list>  
+   	<accel stmt> ::= <accel begin> <accel setdev dir>  
+   	<accel stmt> ::= <accel begin> CACHE ( <ident> : <accel sdata list> )  
+   	<accel stmt> ::= <accel begin> ACCSERIAL <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCENDSERIAL  
+   	<accel stmt> ::= <accel begin> ACCSERIALLOOP <opt accel list>   
+   	<accel stmt> ::= <accel begin> ACCENDSERIALLOOP  
+   	<accel stmt> ::= <accel begin> <accel compare dir>  
+   	<accel stmt> ::= <pgi begin> <pgi compare dir>
+   	<accel begin> 
+   	<pgi begin> 
+   	<opt accel list>  
+   	<opt accel list> ::= <opt comma> <accel list>
+   	<accel list> ::= <accel list> <opt comma> <accel attr>  
+   	<accel list> ::= <accel attr>
+   	<accel attr> ::= COPYIN ( <accel data list> )  
+   	<accel attr> ::= COPYOUT ( <accel data list> )  
+   	<accel attr> ::= LOCAL ( <accel data list> )  
+   	<accel attr> ::= CREATE ( <accel data list> )  
+   	<accel attr> ::= PRESENT ( <accel data list> )  
+   	<accel attr> ::= PCOPY ( <accel data list> )  
+   	<accel attr> ::= PCOPYIN ( <accel data list> )  
+   	<accel attr> ::= PCOPYOUT ( <accel data list> )  
+   	<accel attr> ::= PLOCAL ( <accel data list> )  
+   	<accel attr> ::= PCREATE ( <accel data list> )  
+   	<accel attr> ::= DEVICEPTR ( <accel mdata list> )  
+   	<accel attr> ::= PRIVATE ( <accel mdata list> )  
+   	<accel attr> ::= FIRSTPRIVATE ( <accel mdata list> )  
+   	<accel attr> ::= CACHE ( <accel mdata list> )  
+   	<accel attr> ::= SHORTLOOP  
+   	<accel attr> ::= VECTOR ( <ident> : <expression> )  
+   	<accel attr> ::= VECTOR ( <expression> )  
+   	<accel attr> ::= VECTOR  
+   	<accel attr> ::= PARALLEL ( <expression> )  
+   	<accel attr> ::= PARALLEL  
+   	<accel attr> ::= SEQ ( <expression> )  
+   	<accel attr> ::= SEQ  
+   	<accel attr> ::= HOST ( <expression> )  
+   	<accel attr> ::= HOST  
+   	<accel attr> ::= IF ( <expression> )  
+   	<accel attr> ::= UNROLL ( <expression> )  
+   	<accel attr> ::= INDEPENDENT  
+   	<accel attr> ::= KERNEL  
+   	<accel attr> ::= COPY ( <accel data list> )  
+   	<accel attr> ::= MIRROR ( <accel mdata list> )  
+   	<accel attr> ::= ACCUPDATE HOST ( <accel data list> )  
+   	<accel attr> ::= ACCUPDATE SELF ( <accel data list> )  
+   	<accel attr> ::= ACCUPDATE DEVICE ( <accel data list> )  
+   	<accel attr> ::= <accel short update>  
+   	<accel attr> ::= ACCUPDATE ACCIN ( <accel data list> )  
+   	<accel attr> ::= ACCUPDATE ACCOUT ( <accel data list> )  
+   	<accel attr> ::= ACCWAIT  
+   	<accel attr> ::= NOWAIT  
+   	<accel attr> ::= WORKER ( <ident> : <expression> )  
+   	<accel attr> ::= WORKER ( <expression> )  
+   	<accel attr> ::= WORKER  
+   	<accel attr> ::= GANG ( <acc gang args> )  
+   	<accel attr> ::= GANG  
+   	<accel attr> ::= COLLAPSE ( <expression> )  
+   	<accel attr> ::= ASYNC  
+   	<accel attr> ::= ASYNC ( <expression> )  
+   	<accel attr> ::= REDUCTION ( <reduction> )  
+   	<accel attr> ::= NUM_WORKERS ( <expression> )  
+   	<accel attr> ::= NUM_GANGS ( <gangsizes> )  
+   	<accel attr> ::= VECTOR_LENGTH ( <expression> )  
+   	<accel attr> ::= USE_DEVICE ( <accel mdata list> )  
+   	<accel attr> ::= DEVICEID ( <expression> )  
+   	<accel attr> ::= DELETE ( <accel data list> )  
+   	<accel attr> ::= PDELETE ( <accel data list> )  
+   	<accel attr> ::= ACCWAIT ( <accel wait list> )  
+   	<accel attr> ::= DEVICE_TYPE ( <devtype list> )  
+   	<accel attr> ::= AUTO  
+   	<accel attr> ::= ACCTILE ( <accsizelist> )  
+   	<accel attr> ::= DEFAULT ( <ident> )  
+   	<accel attr> ::= PNOT ( <accel data list> )  
+   	<accel attr> ::= COLLAPSE ( <ident> : <expression> )  
+   	<accel attr> ::= ACCFINALIZE  
+   	<accel attr> ::= ACCIFPRESENT  
+   	<accel attr> ::= ACCATTACH ( <accel data list> )  
+   	<accel attr> ::= ACCDETACH ( <accel data list> )  
+   	<accel attr> ::= NO_CREATE ( <accel data list> )  
+   	<accel attr> ::= COMPARE ( <accel data list> )
+   	<acc gang args> ::= <acc gang arg>  
+   	<acc gang args> ::= <acc gang args> , <acc gang arg>
+   	<acc gang arg> ::= <expression>  
+   	<acc gang arg> ::= <ident> : <accsize>
+   	<gangsizes> ::= <expression>  
+   	<gangsizes> ::= <expression> , <gangsize2>
+   	<gangsize2> ::= <expression>  
+   	<gangsize2> ::= <expression> , <gangsize3>
+   	<gangsize3> ::= <expression>
+   	<accsizelist> ::= <accsize>  
+   	<accsizelist> ::= <accsizelist> , <accsize>
+   	<accsize> ::= <expression>  
+   	<accsize> ::= @
+   	<opt end accel list>  
+   	<opt end accel list> ::= <end accel list>
+   	<end accel list> ::= <end accel list> <opt comma> <end accel attr>  
+   	<end accel list> ::= <end accel attr>
+   	<end accel attr> ::= ACCWAIT  
+   	<end accel attr> ::= NOWAIT
+   	<accel data list> ::= <accel data list> , <accel data>  
+   	<accel data list> ::= <accel data>
+   	<accel data> ::= <accel data name> ( <accel sub list> )  
+   	<accel data> ::= <accel data name>  
+   	<accel data> ::= <constant>  
+   	<accel data> ::= <common>  
+   	<accel data> ::= <accel data name> '<' <ident> '>' ( <accel sub list> )  
+   	<accel data> ::= <accel data name> '<' <ident> '>'
+   	<accel mdata list> ::= <accel mdata list> , <accel mdata>  
+   	<accel mdata list> ::= <accel mdata>
+   	<accel mdata> ::= <accel mdata name> ( <accel sub list> )  
+   	<accel mdata> ::= <accel mdata name>  
+   	<accel mdata> ::= <constant>
+   	<accel sdata list> ::= <accel sdata list> , <accel sdata>  
+   	<accel sdata list> ::= <accel sdata>
+   	<accel sdata> ::= <accel sdata name>  
+   	<accel sdata> ::= <constant>
+   	<accel sub list> ::= <accel sub list> , <accel sub>  
+   	<accel sub list> ::= <accel sub>
+   	<accel sub> ::= <opt sub> : <opt sub>  
+   	<accel sub> ::= <expression>
+   	<accel update dir> ::= ACCUPDATE <accel update list>  
+   	<accel update dir> ::= ACCUPDATEHOST ( <accel data list> ) <opt update list>  
+   	<accel update dir> ::= ACCUPDATESELF ( <accel data list> ) <opt update list>  
+   	<accel update dir> ::= ACCUPDATEDEV ( <accel data list> ) <opt update list>  
+   	<accel update dir> ::= ACCUPDATEIN ( <accel data list> ) <opt update list>  
+   	<accel update dir> ::= ACCUPDATEOUT ( <accel data list> ) <opt update list>
+   	<opt update list>  
+   	<opt update list> ::= <accel update list>
+   	<accel update list> ::= <accel update attr>  
+   	<accel update list> ::= <accel update list> <opt comma> <accel update attr>
+   	<accel update attr> ::=  HOST ( <accel data list> )  
+   	<accel update attr> ::= SELF ( <accel data list> )  
+   	<accel update attr> ::= DEVICE ( <accel data list> )  
+   	<accel update attr> ::= ACCIN ( <accel data list> )  
+   	<accel update attr> ::= ACCOUT ( <accel data list> )  
+   	<accel update attr> ::= IF ( <expression> )  
+   	<accel update attr> ::= ASYNC  
+   	<accel update attr> ::= ASYNC ( <expression> )  
+   	<accel update attr> ::= DEVICEID ( <expression> )  
+   	<accel update attr> ::= ACCWAIT  
+   	<accel update attr> ::= ACCWAIT ( <accel wait list> )  
+   	<accel update attr> ::= ACCIFPRESENT
+   	<accel short update> ::= ACCUPDATEHOST ( <accel data list> )   
+   	<accel short update> ::= ACCUPDATESELF ( <accel data list> )   
+   	<accel short update> ::= ACCUPDATEDEV ( <accel data list> )   
+   	<accel short update> ::= ACCUPDATEIN ( <accel data list> )   
+   	<accel short update> ::= ACCUPDATEOUT ( <accel data list> )
+   	<opt wait list>  
+   	<opt wait list> ::= ( <accel wait list> )  
+   	<opt wait list> ::= <opt wait list> <wait item>
+   	<wait item> ::=  IF ( <expression> )  
+   	<wait item> ::= DEVICEID ( <expression> )  
+   	<wait item> ::= ASYNC  
+   	<wait item> ::= ASYNC ( <expression> )
+   	<accel wait list> ::= <expression>  
+   	<accel wait list> ::= <accel wait list> , <expression>
+   	<kernel stmt> ::= <kernel begin> KERNEL DO <kernel do list>
+   	<kernel begin> 
+   	<kernel do list> ::= <kernel do nest> <kernel do shape>
+   	<kernel do nest>  
+   	<kernel do nest> ::= ( )  
+   	<kernel do nest> ::= ( <expression> )
+   	<kernel do shape>  
+   	<kernel do shape> ::= '<<<'  '>>>'  
+   	<kernel do shape> ::= '<<<' <kernel do grid shape> , <kernel do block shape> <kernel do args> '>>>'
+   	<kernel do grid shape>  
+   	<kernel do grid shape> ::= @  
+   	<kernel do grid shape> ::= <expression>  
+   	<kernel do grid shape> ::= <elp> )  
+   	<kernel do grid shape> ::= <elp> @ )  
+   	<kernel do grid shape> ::= <elp> <kernel shape list> )
+   	<kernel do block shape>  
+   	<kernel do block shape> ::= @  
+   	<kernel do block shape> ::= <expression>  
+   	<kernel do block shape> ::= <elp> )  
+   	<kernel do block shape> ::= <elp> @ )  
+   	<kernel do block shape> ::= <elp> <kernel shape list> )
+   	<kernel shape list> ::= <kernel shape expr> , <kernel shape expr>  
+   	<kernel shape list> ::= <kernel shape list> , <kernel shape expr>
+   	<kernel shape expr>  
+   	<kernel shape expr> ::= @  
+   	<kernel shape expr> ::= <expression>
+   	<kernel do args>  
+   	<kernel do args> ::= <kernel do args> , <kernel do arg>
+   	<kernel do arg>  
+   	<kernel do arg> ::= <expression>  
+   	<kernel do arg> ::= <id name> = <expression>
+   	<opt accel init list>  
+   	<opt accel init list> ::= <opt accel init list> <opt comma> <acc init attr>
+   	<acc init attr> ::= DEVICE_NUM ( <expression> )  
+   	<acc init attr> ::= DEVICE_TYPE ( <devtype list> )
+   	<accel setdev dir> ::= ACCSET <accel setdev list>
+   	<accel setdev list> ::= <accel setdev attr>  
+   	<accel setdev list> ::= <accel setdev list> <opt comma> <accel setdev attr>
+   	<accel setdev attr> ::= DEVICE_TYPE ( <ident> )  
+   	<accel setdev attr> ::= DEVICE_NUM ( <expression> )  
+   	<accel setdev attr> ::= DEFAULT_ASYNC ( <expression> )
+   	<opt accel shutdown list>  
+   	<opt accel shutdown list> ::= <opt accel shutdown list> <opt comma> <acc shutdown attr>
+   	<acc shutdown attr> ::= DEVICE_NUM ( <expression> )  
+   	<acc shutdown attr> ::= DEVICE_TYPE ( <devtype list> )
+   	<accel compare dir> ::= COMPARE ( <accel data list> )
+   	<pgi compare dir> ::= PGICOMPARE ( <accel data list> )
