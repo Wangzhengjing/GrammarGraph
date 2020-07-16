@@ -16,51 +16,55 @@ str_child=
 str_parent=
 rst=`rm -rf ./$dstfile`
 
-echo "graph dig {" >> ./$dstfile
+echo "digraph dig {" >> ./$dstfile
 
-exclud1="\=> \.\."
-exclud2="= ."
-exclud="^ ! $ & % @ ' + - \* / , ; ( ) :"
+exclud1="'=>' \.\. '>>>' '<<<'"
+exclud2="= . '"
+exclud="^ ! $ & % @ + - \* / , ; ( ) :"
 
 generate_child()
 {
 	echo str_child $str_child
-	for i in $str_child
-	do
-		rst=`expr index "$i" '>' 2>&1`
-		if [ $? = 0 ];then
-			if ! [ $rst = 0 ];then
-				endflag=$END
-			fi
-		fi
-		rst=`expr index "$i" '<' 2>&1`
-		if [ $? = 0 ];then
-			if ! [ $rst  = 0 ];then
-				endflag=$START
-			fi
+	if [ 0 = 1 ];then
+		for i in $str_child
+		do
 			rst=`expr index "$i" '>' 2>&1`
-			if ! [ $rst  = 0 ];then
+			if [ $? = 0 ];then
+				if ! [ $rst = 0 ];then
+					endflag=$END
+				fi
+			fi
+			rst=`expr index "$i" '<' 2>&1`
+			if [ $? = 0 ];then
+				if ! [ $rst  = 0 ];then
+					endflag=$START
+				fi
+				rst=`expr index "$i" '>' 2>&1`
+				if ! [ $rst  = 0 ];then
+					endflag=$NORMAL
+				fi
+			fi
+			if [ $endflag = $START ];then
+				keyword=$keyword" "$i
+				continue
+			fi
+			if [ $endflag = $END ];then
+				keyword=$keyword" "$i
+				i=$keyword
+				keyword=
 				endflag=$NORMAL
 			fi
-		fi
-		if [ $endflag = $START ];then
-			keyword=$keyword" "$i
-			continue
-		fi
-		if [ $endflag = $END ];then
-			keyword=$keyword" "$i
-			i=$keyword
-			keyword=
-			endflag=$NORMAL
-		fi
 
-		echo "$str_parent -- $i;" >> ./$dstfile 2>&1
-	done
+			echo "$str_parent -> $i;" >> ./$dstfile 2>&1
+		done
+	else
+		echo "$str_parent -> {$str_child};" >> ./$dstfile 2>&1
+	fi
 }
 
 while read line
 do
-	#line="<equiv var> ::= <equiv var> . <ident>"
+	#line="<chevron> ::= '<<<' '=>' <expression list> '>>>'"
 	str_child=${line#*::=}
 	str_parent=${line%::=*}
 
@@ -103,3 +107,9 @@ do
 done < $1
 
 echo "}" >> ./$dstfile
+
+if [ 1 = 1 ];then
+	dot -Tpdf ./$dstfile -o $dstfile.pdf
+else
+	dot -Tpng ./$dstfile -o $dstfile.png
+fi
