@@ -1,0 +1,137 @@
+#!/bin/bash
+
+if [ $# = 0 ];then
+	echo "请指定解析目标规则."
+	exit 1
+fi
+
+GRAMTXT=./grammar.txt
+START=1
+END=0
+NORMAL=2
+endflag=$NORMAL
+keyword=
+str_child=
+str_parent=
+rule=$1
+tmpfile=
+
+analyze_parent()
+{	
+	rst=`echo $children | grep "$rule"`
+	if [ $? = 0 ];then
+		echo $parent
+	fi
+}
+
+#将目标文件倒叙排列
+sort_file_upsidedown()
+{
+	tmpfile=./sort.file
+	if [ -f $tmpfile ];then
+		rst=`rm $tmpfile`
+	fi
+	if ! [ -f $tmpfile ];then
+		rst=`touch $tmpfile`
+		echo >> $tmpfile
+	fi
+
+	while read line
+	do
+		sed -i "1i\ $line" $tmpfile
+	done < $1
+}
+
+#格式化规则
+format_children()
+{
+	fmt_child=
+	for i in $str_child
+	do
+		rst=`expr index "$i" '>' 2>&1`
+		if [ $? = 0 ];then
+			if ! [ $rst = 0 ];then
+				endflag=$END
+			fi
+		fi
+		rst=`expr index "$i" '<' 2>&1`
+		if [ $? = 0 ];then
+			if ! [ $rst  = 0 ];then
+				endflag=$START
+			fi
+			rst=`expr index "$i" '>' 2>&1`
+			if ! [ $rst  = 0 ];then
+				endflag=$NORMAL
+			fi
+		fi
+		if [ $endflag = $START ];then
+			keyword=$keyword" "$i
+			continue
+		fi
+		if [ $endflag = $END ];then
+			keyword=$keyword" "$i
+			i=$keyword
+			keyword=
+			endflag=$NORMAL
+		fi
+
+		fmt_child=$fmt_child"&"$i
+	done
+	echo "$str_parent::= $fmt_child \\\\" >> ./$mkFmtFile 2>&1
+	echo "\\hdashline" >> ./$mkFmtFile 2>&1
+}
+
+#格式化指定文件
+format_file()
+{
+	mkFmtFile=./format.md
+	if [ -f $mkFmtFile ];then
+		rst=`rm ./$mkFmtFile`
+	fi
+	echo "\$\$" >> ./$mkFmtFile 2>&1
+	echo "\\def\\arraystretch{1.0}" >> ./$mkFmtFile 2>&1
+	echo "\\begin{array}{c:c:c:c:c:c:c:c:c:c:c:c:c:c:c}" >> ./$mkFmtFile 2>&1
+	while read line
+	do
+		str_child=${line#*::=}
+		str_parent=${line%::=*}
+
+		format_children $str_child
+
+	done < $tmpfile
+	echo "\\end{array}" >> ./$mkFmtFile 2>&1
+	echo "\$\$" >> ./$mkFmtFile 2>&1
+	echo "The format file $mkFmtFile has been generated"
+}
+
+analyze_rule()
+{
+	#规则内容
+	children=
+	#规则名称
+	parent=
+
+	while read line
+	do
+		children=`echo $line | awk -F "::=" '{print $2}'`
+		parent=`echo $line | awk -F "::=" '{print $1}'`
+
+		analyze_parent
+	done < $GRAMTXT
+}
+
+case $1 in
+	"format")
+		echo "Formatting File $2 ..."
+		sort_file_upsidedown $2
+		format_file
+		;;
+	"-h")
+		echo -e "\tUSAGE:"
+		echo -e "\t$0	format	"
+		;;
+	*)
+		$0 -h
+		;;
+esac
+
